@@ -1,0 +1,20 @@
+Gra "Bomberman" - rozsadŸ przeciwnika swoimi bombami i zostañ zwyciêzc¹!
+Gra dla 2 graczy (komputer + cz³owiek lub cz³owiek + cz³owiek) ³¹cz¹ca elementy gry strategicznej i zrêcznoœciowej.
+Gra w czasie rzeczywistym - nie turowym.
+Wykorzystana technologia: WPF.
+
+Implementacja: Tomasz Kononowicz (lider) i Katarzyna Trzciñska
+
+Elementy gry:
+- menu (Katarzyna, Tomasz)
+- poruszanie przy pomocy klawiatury (Tomasz)
+- mapa o kszta³cie kratowym (Tomasz)
+- widok 2D (Tomasz)
+- przygotowanie grafik (Katarzyna)
+- wiele przygotowanych wczeœniej map do wyboru (Katarzyna)
+- mo¿liwoœæ wczytania mapy z pliku lub jej wygenerowania (Katarzyna)
+- mo¿liwoœæ zbierania bonusów znajduj¹cych siê na planszy np. natychmiastowa œmieræ, zwiêkszenie si³y bomb, zwiêkszenie liczby bomb, nieœmiertelnoœæ (Katarzyna)
+- na mapie znajduj¹ siê elementy, które mo¿na zniszczyæ i takie, których nie mo¿na (Tomasz)
+- zwyciêstwo zawodnika po 3 wygranych rundach (Katarzyna)
+- potwory (Tomasz)
+
