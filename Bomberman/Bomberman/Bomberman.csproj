@@ -57,7 +57,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Board.cs" />
+    <Compile Include="BombMinusTime.cs" />
+    <Compile Include="BombPlusAmount.cs" />
+    <Compile Include="BombPlusStrength.cs" />
+    <Compile Include="BombPlusTime.cs" />
     <Compile Include="Bonus.cs" />
+    <Compile Include="Life.cs" />
     <Compile Include="Wall.cs" />
     <Page Include="CloseWindow.xaml">
       <SubType>Designer</SubType>
@@ -149,6 +154,13 @@
     <Resource Include="Images\sand.png" />
     <Resource Include="Images\wall.png" />
     <Resource Include="Images\wall2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bombMinusTime.png" />
+    <Resource Include="Images\bombPlus.png" />
+    <Resource Include="Images\bombPlusStrength.png" />
+    <Resource Include="Images\bombPlusTime.png" />
+    <Resource Include="Images\life.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

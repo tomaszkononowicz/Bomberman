@@ -21,7 +21,8 @@ namespace Bomberman
     {
         public const int WIDTH = 20;
         public const int HEIGHT = 13;
-        private List<List<Element>> boardElements = new List<List<Element>>();
+        private List<Element>[,] boardElements = new List<Element>[HEIGHT,WIDTH];
+        private List<Element> placeElements = new List<Element>();
         private Random random = new Random();
 
         public GameWindow()
@@ -44,34 +45,61 @@ namespace Bomberman
             {
                 for (int j = 0; j < WIDTH; j++)
                 {
+                    placeElements = new List<Element>();
                     int rand = random.Next(0, 4);
                     switch (rand)
                     {
                         case 0:
-                            boardElements.Add(new List<Element> { new Wall("wall", i, j, true) });
+                            placeElements.Add(new Wall("wall", i, j, true));
                             break;
                         case 1:
-                            boardElements.Add(new List<Element> { new Wall("wall", i, j, false) });
+                            placeElements.Add( new Wall("wall", i, j, false));
                             break;
                         case 2:
-                            boardElements.Add(new List<Element> { new Bed("sand", i, j, true) });
+                            placeElements.Add(new Bed("sand", i, j, true));
                             break;
                         case 3:
-                            boardElements.Add(new List<Element> { new Bed("grass", i, j, true) });
+                            placeElements.Add(new Bed("grass", i, j, true));
                             break;
                     }
+
+                    if (rand % 3 ==0 && !(placeElements.ElementAt(0) is Wall))
+                    {
+                        int rand2 = random.Next(0, 5);
+                        switch (rand2)
+                        {
+                            case 0:
+                                placeElements.Add(new Life("life", i, j, true));
+                                break;
+                            case 1:
+                                placeElements.Add(new BombPlusTime("bombPlusTime", i, j, true));
+                                break;
+                            case 2:
+                                placeElements.Add(new BombMinusTime("bombMinusTime", i, j, true));
+                                break;
+                            case 3:
+                                placeElements.Add(new BombPlusAmount("bombPlus", i, j, true));
+                                break;
+                            case 4:
+                                placeElements.Add(new BombPlusStrength("bombPlusStrength", i, j, true));
+                                break;
+                        }
+                    }
+                    boardElements[i,j] = placeElements;
                 }
             }
-
         }
 
         private void drawBoard()
         {
-            foreach (List<Element> subList in boardElements)
+            for (int i = 0; i < HEIGHT; i++)
             {
-                foreach (Element el in subList)
+                for (int j = 0; j < WIDTH; j++)
                 {
-                    drawElement(el);
+                    foreach (Element el in boardElements[i,j])
+                    {
+                        drawElement(el);
+                    }
                 }
             }
         }

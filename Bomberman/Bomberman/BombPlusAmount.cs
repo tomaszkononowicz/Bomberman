@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Bomberman
 {
-    class Board
+    class BombPlusAmount : Element, Bonus
     {
-       
+        public BombPlusAmount(string name, int x, int y, Boolean destroyable) : base(name, x, y, destroyable) { }
     }
 }
