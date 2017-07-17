@@ -11,15 +11,15 @@
         <ImageBrush ImageSource="/Images/gameBackground.png"/>
     </Window.Background>
     <Grid>
-        <StackPanel HorizontalAlignment="Left" Height="650" Margin="15,15,10,0" VerticalAlignment="Top" Width="1000"/>
-        <Label x:Name="labelLifes" Content="Lifes:" HorizontalAlignment="Left" Height="54" Margin="1050,53,0,0" VerticalAlignment="Top" Width="60" FontSize="29.333" FontFamily="Gabriola"/>
-        <TextBox x:Name="textBoxLifes" HorizontalAlignment="Left" Height="44" Margin="1142,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola"/>
-        <Label x:Name="labelBombs" Content="Bombs:" HorizontalAlignment="Left" Height="54" Margin="1050,102,0,0" VerticalAlignment="Top" Width="87" FontSize="29.333" FontFamily="Gabriola"/>
-        <TextBox x:Name="textBoxBombs" HorizontalAlignment="Left" Height="44" Margin="1142,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola"/>
-        <Label x:Name="labelBombsStrenght" Content="Bombs strenght:" HorizontalAlignment="Left" Height="54" Margin="1050,149,0,0" VerticalAlignment="Top" Width="173" FontSize="29.333" FontFamily="Gabriola"/>
-        <TextBox x:Name="textBoxBombsStrenght" HorizontalAlignment="Left" Height="44" Margin="1223,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola"/>
-        <Label x:Name="labelExplodeTime" Content="Time to explode" HorizontalAlignment="Left" Height="54" Margin="1050,199,0,0" VerticalAlignment="Top" Width="173" FontSize="29.333" FontFamily="Gabriola"/>
-        <TextBox x:Name="textBoxExplodeTime" HorizontalAlignment="Left" Height="44" Margin="1223,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola"/>
+        <WrapPanel x:Name="gamePanel" HorizontalAlignment="Left" Height="650" Margin="15,15,10,0" VerticalAlignment="Top" Width="1000"/>
+        <Label x:Name="labelLifes" Content="Lifes:" HorizontalAlignment="Left" Height="54" Margin="1037,53,0,0" VerticalAlignment="Top" Width="60" FontSize="29.333" FontFamily="Gabriola"/>
+        <TextBox x:Name="textBoxLifes" HorizontalAlignment="Left" Height="44" Margin="1129,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola"/>
+        <Label x:Name="labelBombs" Content="Bombs:" HorizontalAlignment="Left" Height="54" Margin="1037,102,0,0" VerticalAlignment="Top" Width="87" FontSize="29.333" FontFamily="Gabriola"/>
+        <TextBox x:Name="textBoxBombs" HorizontalAlignment="Left" Height="44" Margin="1129,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola"/>
+        <Label x:Name="labelBombsStrenght" Content="Bombs strenght:" HorizontalAlignment="Left" Height="54" Margin="1037,149,0,0" VerticalAlignment="Top" Width="173" FontSize="29.333" FontFamily="Gabriola"/>
+        <TextBox x:Name="textBoxBombsStrenght" HorizontalAlignment="Left" Height="44" Margin="1210,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola"/>
+        <Label x:Name="labelExplodeTime" Content="Time to explode:" HorizontalAlignment="Left" Height="54" Margin="1037,199,0,0" VerticalAlignment="Top" Width="173" FontSize="29.333" FontFamily="Gabriola"/>
+        <TextBox x:Name="textBoxExplodeTime" HorizontalAlignment="Left" Height="44" Margin="1210,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola"/>
         <StackPanel HorizontalAlignment="Left" Height="93" Margin="1050,258,0,0" VerticalAlignment="Top" Width="207"/>
         <Button x:Name="buttonBack" Content="Button" HorizontalAlignment="Left" Height="45" Margin="1223,634,0,0" VerticalAlignment="Top" Width="39" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="buttonBack_Click">
             <Button.Template>

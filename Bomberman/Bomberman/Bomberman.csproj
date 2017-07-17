@@ -56,6 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Board.cs" />
+    <Compile Include="Bonus.cs" />
+    <Compile Include="Wall.cs" />
     <Page Include="CloseWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -72,9 +75,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Bed.cs" />
     <Compile Include="CloseWindow.xaml.cs">
       <DependentUpon>CloseWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Element.cs" />
     <Compile Include="GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>
@@ -84,6 +89,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -137,6 +143,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\map.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\grass.png" />
+    <Resource Include="Images\sand.png" />
+    <Resource Include="Images\wall.png" />
+    <Resource Include="Images\wall2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
