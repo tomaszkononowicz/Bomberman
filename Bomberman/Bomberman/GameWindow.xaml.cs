@@ -151,9 +151,9 @@ namespace Bomberman
             gamePanel.Children.Add(el.getImage());
         }
 
-        private void buttonSerialisation_Click(object sender, RoutedEventArgs e)
+        private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
-            FileStream fs = new FileStream("Board5.dat", FileMode.Create);
+            FileStream fs = new FileStream("SaveBoard.dat", FileMode.Create);
             BinaryFormatter formatter = new BinaryFormatter();
             try
             {
@@ -161,13 +161,15 @@ namespace Bomberman
             }
             catch (SerializationException se)
             {
-                Console.WriteLine("Failed to serialize. Reason: " + se.Message);
-                throw;
+                ErrorWindow ew = new ErrorWindow();
+                ew.ShowDialog();
             }
             finally
             {
                 fs.Close();
             }
+            SaveWindow sw = new SaveWindow();
+            sw.ShowDialog();
         }
 
         public void deserialise(string fileName)
@@ -181,8 +183,8 @@ namespace Bomberman
             }
             catch (SerializationException se)
             {
-                Console.WriteLine("Failed to deserialize. Reason: " + se.Message);
-                throw;
+                ErrorWindow ew = new ErrorWindow();
+                ew.ShowDialog();
             }
             finally
             {
@@ -242,6 +244,7 @@ namespace Bomberman
                     }
                 }
             }
+            boardElements = newBoardElements;
         }
     }
 }
