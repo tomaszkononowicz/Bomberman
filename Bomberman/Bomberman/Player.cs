@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bomberman
 {
+    [Serializable]
     class Player : Element
     {
         public Player(string name, int x, int y, Boolean destroyable) : base(name, x, y, destroyable) { }

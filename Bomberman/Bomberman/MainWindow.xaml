@@ -60,7 +60,7 @@
                 </ControlTemplate>
             </Button.Template>
             <Button.Background>
-                <ImageBrush ImageSource="Images/map.jpg"/>
+                <ImageBrush ImageSource="Images/board1.PNG"/>
             </Button.Background>
         </Button>
         <Button x:Name="buttonMap2" Content="Button" HorizontalAlignment="Left" Height="125" Margin="759,189,0,0" VerticalAlignment="Top" Width="221" Click="buttonMap2_Click" BorderBrush="{x:Null}" Foreground="{x:Null}">
@@ -86,7 +86,7 @@
                 </ControlTemplate>
             </Button.Template>
             <Button.Background>
-                <ImageBrush ImageSource="Images/map.jpg"/>
+                <ImageBrush ImageSource="Images/board2.PNG"/>
             </Button.Background>
         </Button>
         <Button x:Name="buttonMap3" Content="Button" HorizontalAlignment="Left" Height="125" Margin="1011,189,0,0" VerticalAlignment="Top" Width="221" Click="buttonMap3_Click" BorderBrush="{x:Null}" Foreground="{x:Null}">
@@ -112,7 +112,7 @@
                 </ControlTemplate>
             </Button.Template>
             <Button.Background>
-                <ImageBrush ImageSource="Images/map.jpg"/>
+                <ImageBrush ImageSource="Images/board3.PNG"/>
             </Button.Background>
         </Button>
         <Label x:Name="label" Content="Choose a map:" HorizontalAlignment="Left" Height="54" Margin="507,150,0,0" VerticalAlignment="Top" Width="585" FontSize="29.333" FontFamily="Gabriola"/>

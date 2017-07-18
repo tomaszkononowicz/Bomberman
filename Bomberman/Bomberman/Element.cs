@@ -8,18 +8,30 @@ using System.Windows.Media.Imaging;
 
 namespace Bomberman
 {
+    [Serializable]
     abstract class Element
     {
         public string name { get; set; }
         public Position position { get; set; }
         public Boolean destroyable { get; set; }
-        public Image image { get; set; }
+        [NonSerialized]
+        private Image image;
 
         public Element (string name, int x, int y, Boolean destroyable)
         {
             this.name = name;
             this.position = new Position(x, y);
             this.destroyable = destroyable;
+            setImage();
+        }
+
+        public Image getImage()
+        {
+            return image;
+        }
+
+        public void setImage()
+        {
             if (destroyable)
             {
                 this.image = new Image();

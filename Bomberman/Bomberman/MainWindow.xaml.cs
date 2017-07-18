@@ -22,6 +22,7 @@ namespace Bomberman
     /// </summary>
     public partial class MainWindow : Window
     {
+        private GameWindow gw;
         public MainWindow()
         {
             InitializeComponent();
@@ -29,13 +30,14 @@ namespace Bomberman
 
         private void startGameButton_Click(object sender, RoutedEventArgs e)
         {
-            GameWindow gw = new GameWindow();
             this.Close();
             gw.ShowDialog();
         }
 
         private void buttonLoad_Click(object sender, RoutedEventArgs e)
         {
+            if (gw == null)
+                gw = new GameWindow();
             OpenFileDialog fd = new OpenFileDialog();
             fd.Title = "Select your map";
             fd.ShowDialog();
@@ -43,33 +45,44 @@ namespace Bomberman
             buttonMap.BorderThickness = new Thickness(0.0, 0.0, 0.0, 0.0);
             buttonMap2.BorderThickness = new Thickness(0.0, 0.0, 0.0, 0.0);
             buttonMap3.BorderThickness = new Thickness(0.0, 0.0, 0.0, 0.0);
+            gw.deserialise(fd.FileName.ToString());
         }
 
         private void buttonMap_Click(object sender, RoutedEventArgs e)
         {
+            if (gw == null)
+                gw = new GameWindow();
             buttonMap.BorderThickness = new Thickness(3.0, 3.0, 3.0, 3.0);
             buttonMap.BorderBrush = System.Windows.Media.Brushes.DarkBlue;
             buttonMap2.BorderThickness = new Thickness(0.0, 0.0, 0.0, 0.0);
             buttonMap3.BorderThickness = new Thickness(0.0, 0.0, 0.0, 0.0);
             labelUri.Content = "";
+            gw.deserialise("board1.dat");
+
         }
 
         private void buttonMap2_Click(object sender, RoutedEventArgs e)
         {
+            if (gw == null)
+                gw = new GameWindow();
             buttonMap.BorderThickness = new Thickness(0.0, 0.0, 0.0, 0.0);
             buttonMap2.BorderThickness = new Thickness(3.0, 3.0, 3.0, 3.0);
             buttonMap2.BorderBrush = System.Windows.Media.Brushes.DarkBlue;
             buttonMap3.BorderThickness = new Thickness(0.0, 0.0, 0.0, 0.0);
             labelUri.Content = "";
+            gw.deserialise("board2.dat");
         }
 
         private void buttonMap3_Click(object sender, RoutedEventArgs e)
         {
+            if (gw == null)
+                gw = new GameWindow();
             buttonMap.BorderThickness = new Thickness(0.0, 0.0, 0.0, 0.0);
             buttonMap2.BorderThickness = new Thickness(0.0, 0.0, 0.0, 0.0);
             buttonMap3.BorderThickness = new Thickness(3.0, 3.0, 3.0, 3.0);
             buttonMap3.BorderBrush = System.Windows.Media.Brushes.DarkBlue;
             labelUri.Content = "";
+            gw.deserialise("board3.dat");
         }
 
         private void button_Click(object sender, RoutedEventArgs e)

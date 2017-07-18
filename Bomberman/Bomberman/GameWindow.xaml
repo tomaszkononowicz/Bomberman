@@ -47,5 +47,6 @@
                 <ImageBrush ImageSource="Images/back.png"/>
             </Button.Background>
         </Button>
+        <Button x:Name="buttonSerialisation" Content="Serialisation" HorizontalAlignment="Left" Height="26" Margin="1070,383,0,0" VerticalAlignment="Top" Width="140" Click="buttonSerialisation_Click"/>
     </Grid>
 </Window>

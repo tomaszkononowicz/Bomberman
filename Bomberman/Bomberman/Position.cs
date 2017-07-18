@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bomberman
 {
+    [Serializable]
     class Position
     {
         public int x { get; set; }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bomberman
 {
+    [Serializable]
     class Wall : Element
     {
         public Wall(string name, int x, int y, Boolean destroyable) : base(name, x, y, destroyable) { }

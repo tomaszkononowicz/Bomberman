@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -143,9 +146,102 @@ namespace Bomberman
 
         private void drawElement(Element el)
         {
-            Canvas.SetLeft(el.image, el.position.y * 50.0);
-            Canvas.SetTop(el.image, el.position.x * 50.0);
-            gamePanel.Children.Add(el.image);
+            Canvas.SetLeft(el.getImage(), el.position.y * 50.0);
+            Canvas.SetTop(el.getImage(), el.position.x * 50.0);
+            gamePanel.Children.Add(el.getImage());
+        }
+
+        private void buttonSerialisation_Click(object sender, RoutedEventArgs e)
+        {
+            FileStream fs = new FileStream("Board5.dat", FileMode.Create);
+            BinaryFormatter formatter = new BinaryFormatter();
+            try
+            {
+                formatter.Serialize(fs, boardElements);
+            }
+            catch (SerializationException se)
+            {
+                Console.WriteLine("Failed to serialize. Reason: " + se.Message);
+                throw;
+            }
+            finally
+            {
+                fs.Close();
+            }
+        }
+
+        public void deserialise(string fileName)
+        {
+            List<Element>[,] newBoardElements = null;
+            FileStream fs = new FileStream(fileName, FileMode.Open);
+            try
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                newBoardElements = (List<Element>[,])formatter.Deserialize(fs);
+            }
+            catch (SerializationException se)
+            {
+                Console.WriteLine("Failed to deserialize. Reason: " + se.Message);
+                throw;
+            }
+            finally
+            {
+                fs.Close();
+            }
+
+            gamePanel.Children.Clear();
+            for (int i = 0; i < HEIGHT; i++)
+            {
+                for (int j = 0; j < WIDTH; j++)
+                {
+                    foreach (Element el in newBoardElements[i, j])
+                    {
+                        switch (el.name)
+                        {
+                            case "wall":
+                                el.setImage();
+                                break;
+                            case "wall2":
+                                el.setImage();
+                                break;
+                            case "sand":
+                                el.setImage();
+                                break;
+                            case "grass":
+                                el.setImage();
+                                break;
+                            case "bombMinusTime":
+                                el.setImage();
+                                break;
+                            case "bombPlusTime":
+                                el.setImage();
+                                break;
+                            case "bombPlus":
+                                el.setImage();
+                                break;
+                            case "bombPlusStrength":
+                                el.setImage();
+                                break;
+                            case "life":
+                                el.setImage();
+                                break;
+                            case "player":
+                                el.setImage();
+                                break;
+                            case "player2":
+                                el.setImage();
+                                break;
+                            case "spider":
+                                el.setImage();
+                                break;
+                            case "wasp":
+                                el.setImage();
+                                break;
+                        }
+                        drawElement(el);
+                    }
+                }
+            }
         }
     }
 }
