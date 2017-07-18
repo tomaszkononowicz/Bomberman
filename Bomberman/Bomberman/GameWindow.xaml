@@ -12,11 +12,11 @@
     </Window.Background>
     <Grid>
         <Canvas x:Name="gamePanel" HorizontalAlignment="Left" Height="650" Margin="15,15,10,0" VerticalAlignment="Top" Width="1000"/>
-        <Label x:Name="labelLifes" Content="Lifes:" HorizontalAlignment="Left" Height="54" Margin="1037,53,0,0" VerticalAlignment="Top" Width="60" FontSize="29.333" FontFamily="Gabriola"/>
-        <TextBox x:Name="textBoxLifes" HorizontalAlignment="Left" Height="44" Margin="1129,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola"/>
-        <Label x:Name="labelBombs" Content="Bombs:" HorizontalAlignment="Left" Height="54" Margin="1037,102,0,0" VerticalAlignment="Top" Width="87" FontSize="29.333" FontFamily="Gabriola"/>
-        <TextBox x:Name="textBoxBombs" HorizontalAlignment="Left" Height="44" Margin="1129,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola"/>
-        <Label x:Name="labelBombsStrenght" Content="Bombs strenght:" HorizontalAlignment="Left" Height="54" Margin="1037,149,0,0" VerticalAlignment="Top" Width="173" FontSize="29.333" FontFamily="Gabriola"/>
+        <Label x:Name="labelLifes" Content="Lifes:" HorizontalAlignment="Left" Height="54" Margin="1037,49,0,0" VerticalAlignment="Top" Width="60" FontSize="29.333" FontFamily="Gabriola"/>
+        <TextBox x:Name="textBoxLifes" HorizontalAlignment="Left" Height="44" Margin="1129,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola"/>
+        <Label x:Name="labelBombs" Content="Bombs:" HorizontalAlignment="Left" Height="54" Margin="1037,99,0,0" VerticalAlignment="Top" Width="87" FontSize="29.333" FontFamily="Gabriola"/>
+        <TextBox x:Name="textBoxBombs" HorizontalAlignment="Left" Height="44" Margin="1129,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola"/>
+        <Label x:Name="labelBombsStrength" Content="Bomb strength:" HorizontalAlignment="Left" Height="54" Margin="1037,149,0,0" VerticalAlignment="Top" Width="173" FontSize="29.333" FontFamily="Gabriola"/>
         <TextBox x:Name="textBoxBombsStrenght" HorizontalAlignment="Left" Height="44" Margin="1210,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola"/>
         <Label x:Name="labelExplodeTime" Content="Time to explode:" HorizontalAlignment="Left" Height="54" Margin="1037,199,0,0" VerticalAlignment="Top" Width="173" FontSize="29.333" FontFamily="Gabriola"/>
         <TextBox x:Name="textBoxExplodeTime" HorizontalAlignment="Left" Height="44" Margin="1210,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola"/>

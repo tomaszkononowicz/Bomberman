@@ -21,9 +21,13 @@ namespace Bomberman
     {
         public const int WIDTH = 20;
         public const int HEIGHT = 13;
-        private List<Element>[,] boardElements = new List<Element>[HEIGHT,WIDTH];
+        private List<Element>[,] boardElements = new List<Element>[HEIGHT, WIDTH];
         private List<Element> placeElements = new List<Element>();
         private Random random = new Random();
+        public int lifesCounter { get; set; }
+        public int bombCounter { get; set; }
+        public int bombStrength { get; set; }
+        public int bomb { get; set; }
 
         public GameWindow()
         {
