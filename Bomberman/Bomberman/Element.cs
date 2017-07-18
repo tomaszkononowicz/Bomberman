@@ -25,6 +25,11 @@ namespace Bomberman
                 this.image = new Image();
                 this.image.Source = new BitmapImage(new Uri("Images/" + name + ".png", UriKind.RelativeOrAbsolute));
             }
+            else if (destroyable && this.name == "Player2")
+            {
+                this.image = new Image();
+                this.image.Source = new BitmapImage(new Uri("Images/player2.png", UriKind.RelativeOrAbsolute));
+            }
             else
             {
                 this.image = new Image();

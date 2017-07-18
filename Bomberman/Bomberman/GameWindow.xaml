@@ -11,7 +11,7 @@
         <ImageBrush ImageSource="/Images/gameBackground.png"/>
     </Window.Background>
     <Grid>
-        <WrapPanel x:Name="gamePanel" HorizontalAlignment="Left" Height="650" Margin="15,15,10,0" VerticalAlignment="Top" Width="1000"/>
+        <Canvas x:Name="gamePanel" HorizontalAlignment="Left" Height="650" Margin="15,15,10,0" VerticalAlignment="Top" Width="1000"/>
         <Label x:Name="labelLifes" Content="Lifes:" HorizontalAlignment="Left" Height="54" Margin="1037,53,0,0" VerticalAlignment="Top" Width="60" FontSize="29.333" FontFamily="Gabriola"/>
         <TextBox x:Name="textBoxLifes" HorizontalAlignment="Left" Height="44" Margin="1129,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="34" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola"/>
         <Label x:Name="labelBombs" Content="Bombs:" HorizontalAlignment="Left" Height="54" Margin="1037,102,0,0" VerticalAlignment="Top" Width="87" FontSize="29.333" FontFamily="Gabriola"/>

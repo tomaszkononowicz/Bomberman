@@ -62,8 +62,8 @@ namespace Bomberman
                             placeElements.Add(new Bed("grass", i, j, true));
                             break;
                     }
-
-                    if (rand % 3 ==0 && !(placeElements.ElementAt(0) is Wall))
+                    rand = random.Next(0, 4);
+                    if (rand % 4 == 0 && !(placeElements.ElementAt(0) is Wall))
                     {
                         int rand2 = random.Next(0, 5);
                         switch (rand2)
@@ -85,9 +85,42 @@ namespace Bomberman
                                 break;
                         }
                     }
+
+                    rand = random.Next(0, 40);
+                    if (rand % 40 == 0 && !(placeElements.ElementAt(0) is Wall) && placeElements.Count() != 2)
+                    {
+                        if(rand % 2 == 0)
+                            placeElements.Add(new Spider("spider", i, j, true));
+                        else
+                            placeElements.Add(new Wasp("wasp", i, j, true));
+                    }
+                    else if (rand % 40 == 0 && placeElements.Count() != 2)
+                    {
+                        placeElements.Add(new Wasp("wasp", i, j, true));
+                    }
+
                     boardElements[i,j] = placeElements;
                 }
             }
+            int x = 0;
+            int y = 0;
+            while (boardElements[x, y].Count() == 2 || boardElements[x, y].ElementAt(0) is Wall)
+            {
+                x++;
+                if (x == 12) y++;
+            }
+                
+            boardElements[x, y].Add(new Player("player", x, y, true));
+
+            x = 12;
+            y = 19;
+            while (boardElements[x, y].Count() == 2 || boardElements[x, y].ElementAt(0) is Wall)
+            {
+                x--;
+                if (x == 0) y--;
+            }
+            boardElements[x, y].Add(new Player("player2", x, y, true));
+
         }
 
         private void drawBoard()
@@ -106,6 +139,8 @@ namespace Bomberman
 
         private void drawElement(Element el)
         {
+            Canvas.SetLeft(el.image, el.position.y * 50.0);
+            Canvas.SetTop(el.image, el.position.x * 50.0);
             gamePanel.Children.Add(el.image);
         }
     }

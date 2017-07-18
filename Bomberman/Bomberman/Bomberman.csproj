@@ -63,7 +63,10 @@
     <Compile Include="BombPlusTime.cs" />
     <Compile Include="Bonus.cs" />
     <Compile Include="Life.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="Spider.cs" />
     <Compile Include="Wall.cs" />
+    <Compile Include="Wasp.cs" />
     <Page Include="CloseWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -157,10 +160,36 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\bombMinusTime.png" />
-    <Resource Include="Images\bombPlus.png" />
-    <Resource Include="Images\bombPlusStrength.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Images\bombPlusTime.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bombPlus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bombPlusStrength.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Images\life.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bomb1.png" />
+    <Resource Include="Images\bomb2.png" />
+    <Resource Include="Images\bomb3.png" />
+    <Resource Include="Images\bomb4.png" />
+    <Resource Include="Images\bomb5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bomb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\player.png" />
+    <Resource Include="Images\player2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\spider.png" />
+    <Resource Include="Images\wasp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
