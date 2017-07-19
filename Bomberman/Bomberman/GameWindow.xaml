@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Bomberman"
         mc:Ignorable="d"
         Title="GameWindow" Height="720" Width="1280"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown">
     <Window.Background>
         <ImageBrush ImageSource="/Images/gameBackground.png"/>
     </Window.Background>

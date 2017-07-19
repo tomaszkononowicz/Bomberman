@@ -8,7 +8,7 @@
         Title="ErrorWindow" Height="480" Width="640"
         WindowStartupLocation="CenterScreen">
     <Window.Background>
-        <ImageBrush ImageSource="/Images/saveBackground.png"/>
+        <ImageBrush ImageSource="/Images/errorBackground.png"/>
     </Window.Background>
     <Grid>
         <Label x:Name="labelSave" Content="Something went wrong :(" HorizontalAlignment="Left" Height="51" Margin="336,162,0,0" VerticalAlignment="Top" Width="235" FontSize="30" FontFamily="Gabriola"/>
@@ -35,7 +35,7 @@
                 </ControlTemplate>
             </Button.Template>
             <Button.Background>
-                <ImageBrush ImageSource="sad.png"/>
+                <ImageBrush ImageSource="Images/sad.png"/>
             </Button.Background>
         </Button>
     </Grid>

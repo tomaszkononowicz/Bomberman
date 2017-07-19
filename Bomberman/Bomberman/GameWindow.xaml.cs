@@ -246,5 +246,10 @@ namespace Bomberman
             }
             boardElements = newBoardElements;
         }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
     }
 }
