@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,8 +9,7 @@ namespace Bomberman
 {
     interface IMoveable
     {
-        void move(int x, int y, List<Element>[,] boardElements);
-        Boolean checkCollision(int x, int y, List<Element>[,] boardElements);
-
+        void move(int x, int y, ObservableCollection<Element>[,] boardElements);
+        Boolean checkCollision(int x, int y, ObservableCollection<Element>[,] boardElements);
     }
 }

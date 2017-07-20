@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -22,15 +23,15 @@ namespace Bomberman
     /// </summary>
     public partial class GameWindow : Window
     {
-        public const int WIDTH = 20;
-        public const int HEIGHT = 13;
-        private List<Element>[,] boardElements = new List<Element>[HEIGHT, WIDTH];
-        private List<Element> placeElements = new List<Element>();
+        private ObservableCollection<Element>[,] boardElements = new ObservableCollection<Element>[Constants.HEIGHT, Constants.WIDTH];
+        private ObservableCollection<Element> placeElements = new ObservableCollection<Element>();
         private Random random = new Random();
         public int lifesCounter { get; set; }
         public int bombCounter { get; set; }
         public int bombStrength { get; set; }
-        public int bomb { get; set; }
+        public int timeToExplode { get; set; }
+        public string player1Name { get; set; }
+        public string player2Name { get; set; }
 
         public GameWindow()
         {
@@ -48,11 +49,11 @@ namespace Bomberman
 
         private void randElements()
         {
-            for (int i = 0; i < HEIGHT; i++)
+            for (int i = 0; i < Constants.HEIGHT; i++)
             {
-                for (int j = 0; j < WIDTH; j++)
+                for (int j = 0; j < Constants.WIDTH; j++)
                 {
-                    placeElements = new List<Element>();
+                    placeElements = new ObservableCollection<Element>();
                     int rand = random.Next(0, 4);
                     switch (rand)
                     {
@@ -132,9 +133,9 @@ namespace Bomberman
 
         private void drawBoard()
         {
-            for (int i = 0; i < HEIGHT; i++)
+            for (int i = 0; i < Constants.HEIGHT; i++)
             {
-                for (int j = 0; j < WIDTH; j++)
+                for (int j = 0; j < Constants.WIDTH; j++)
                 {
                     foreach (Element el in boardElements[i,j])
                     {
@@ -174,12 +175,12 @@ namespace Bomberman
 
         public void deserialise(string fileName)
         {
-            List<Element>[,] newBoardElements = null;
+            ObservableCollection<Element>[,] newBoardElements = null;
             FileStream fs = new FileStream(fileName, FileMode.Open);
             try
             {
                 BinaryFormatter formatter = new BinaryFormatter();
-                newBoardElements = (List<Element>[,])formatter.Deserialize(fs);
+                newBoardElements = (ObservableCollection<Element>[,])formatter.Deserialize(fs);
             }
             catch (SerializationException se)
             {
@@ -192,9 +193,9 @@ namespace Bomberman
             }
 
             gamePanel.Children.Clear();
-            for (int i = 0; i < HEIGHT; i++)
+            for (int i = 0; i < Constants.HEIGHT; i++)
             {
-                for (int j = 0; j < WIDTH; j++)
+                for (int j = 0; j < Constants.WIDTH; j++)
                 {
                     foreach (Element el in newBoardElements[i, j])
                     {
