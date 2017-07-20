@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Bomberman
 {
     [Serializable]
-    class BombMinusTime : Element, Bonus
+    class BombMinusTime : Element, IBonus
     {
         public BombMinusTime(string name, int x, int y, Boolean destroyable) : base(name, x, y, destroyable) { }
     }

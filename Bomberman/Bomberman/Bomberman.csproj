@@ -61,10 +61,11 @@
     <Compile Include="BombPlusAmount.cs" />
     <Compile Include="BombPlusStrength.cs" />
     <Compile Include="BombPlusTime.cs" />
-    <Compile Include="Bonus.cs" />
     <Compile Include="ErrorWindow.xaml.cs">
       <DependentUpon>ErrorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IBonus.cs" />
+    <Compile Include="IMoveable.cs" />
     <Compile Include="Life.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="SaveWindow.xaml.cs">

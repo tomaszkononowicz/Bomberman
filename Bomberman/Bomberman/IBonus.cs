@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bomberman
 {
-    interface Bonus
+    interface IBonus
     {
     }
 }
