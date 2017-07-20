@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -149,6 +150,7 @@ namespace Bomberman
         {
             Canvas.SetLeft(el.getImage(), el.position.y * 50.0);
             Canvas.SetTop(el.getImage(), el.position.x * 50.0);
+            Canvas.SetZIndex(el.getImage(), 1);
             gamePanel.Children.Add(el.getImage());
         }
 
@@ -246,10 +248,93 @@ namespace Bomberman
                 }
             }
             boardElements = newBoardElements;
+            for (int i = 0; i < Constants.HEIGHT; i++)
+            {
+                for (int j = 0; j < Constants.WIDTH; j++)
+                {
+                    boardElements[i, j].CollectionChanged += this.OnCollectionChanged;
+                }
+            }
+        }
+
+        private Player getPlayer1()
+        {
+            for (int i = 0; i < Constants.HEIGHT; i++)
+            {
+                for (int j = 0; j < Constants.WIDTH; j++)
+                {
+                    if (boardElements[i, j].Count == 2 && boardElements[i, j].ElementAt(1).name.Equals("player"))
+                        return (Player)boardElements[i, j].ElementAt(1);
+                }
+            }
+            return null;
+        }
+
+        private Player getPlayer2()
+        {
+            for (int i = Constants.HEIGHT - 1; i >= 0; i--)
+            {
+                for (int j = Constants.WIDTH - 1; j >= 0; j--)
+                {
+                    if (boardElements[i, j].Count == 2 && boardElements[i, j].ElementAt(1).name.Equals("player2"))
+                        return (Player)boardElements[i, j].ElementAt(1);
+                }
+            }
+            return null;
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
+            switch (e.Key)
+            {
+                case Key.Down:
+                    getPlayer1().move(getPlayer1().position.x + 1, getPlayer1().position.y, boardElements);
+                    break;
+                case Key.Up:
+                    getPlayer1().move(getPlayer1().position.x - 1, getPlayer1().position.y, boardElements);
+                    break;
+                case Key.Right:
+                    getPlayer1().move(getPlayer1().position.x, getPlayer1().position.y + 1, boardElements);
+                    break;
+                case Key.Left:
+                    getPlayer1().move(getPlayer1().position.x, getPlayer1().position.y - 1, boardElements);
+                    break;
+                case Key.W:
+                    getPlayer2().move(getPlayer2().position.x - 1, getPlayer2().position.y, boardElements);
+                    break;
+                case Key.S:
+                    getPlayer2().move(getPlayer2().position.x + 1, getPlayer2().position.y, boardElements);
+                    break;
+                case Key.A:
+                    getPlayer2().move(getPlayer2().position.x, getPlayer2().position.y - 1, boardElements);
+                    break;
+                case Key.D:
+                    getPlayer2().move(getPlayer2().position.x, getPlayer2().position.y + 1, boardElements);
+                    break;
+            }
+        }
+
+        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (Element oldItem in e.OldItems)
+                {
+
+                    if (oldItem.name != "player" && oldItem.name != "player2")
+                        gamePanel.Children.Remove(oldItem.getImage());
+                }
+            }
+
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (Element newItem in e.NewItems)
+                {
+                    Canvas.SetLeft(newItem.getImage(), newItem.position.y * 50.0);
+                    Canvas.SetTop(newItem.getImage(), newItem.position.x * 50.0);
+                    Canvas.SetZIndex(newItem.getImage(), 2);
+                }
+            }
 
         }
     }

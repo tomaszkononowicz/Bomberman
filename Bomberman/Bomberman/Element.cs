@@ -50,5 +50,17 @@ namespace Bomberman
             this.image.Width = 50;
             this.image.Height = 50;
         }
+
+        // if there is a collision returns true, otherwise returns false
+        public Boolean checkCollisionOnBorder(int x, int y)
+        {
+            if (x >= 0
+                    && x < Constants.HEIGHT
+                    && y >= 0
+                    && y < Constants.WIDTH)
+                return false;
+            else
+                return true;
+        }
     }
 }
