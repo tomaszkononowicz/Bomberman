@@ -17,7 +17,38 @@ namespace Bomberman
         {
             if (boardElements[x, y].ElementAt(0) is Wall)
                 return true;
-
+            if (boardElements[x, y].Count == 2)
+            {
+                if (boardElements[x, y].ElementAt(1) is Life)
+                {
+                    boardElements[x, y].Remove(boardElements[x, y].ElementAt(1));
+                    return false;
+                }
+                if (boardElements[x, y].ElementAt(1) is BombMinusTime)
+                {
+                    boardElements[x, y].Remove(boardElements[x, y].ElementAt(1));
+                    return false;
+                }
+                if (boardElements[x, y].ElementAt(1) is BombPlusAmount)
+                {
+                    boardElements[x, y].Remove(boardElements[x, y].ElementAt(1));
+                    return false;
+                }
+                if (boardElements[x, y].ElementAt(1) is BombPlusStrength)
+                {
+                    boardElements[x, y].Remove(boardElements[x, y].ElementAt(1));
+                    return false;
+                }
+                if (boardElements[x, y].ElementAt(1) is BombPlusTime)
+                {
+                    boardElements[x, y].Remove(boardElements[x, y].ElementAt(1));
+                    return false;
+                }
+                if (boardElements[x, y].ElementAt(1) is Spider)
+                    return false;
+                if (boardElements[x, y].ElementAt(1) is Wasp)
+                    return false;
+            }
             return false;
         }
 
