@@ -13,6 +13,7 @@ namespace Bomberman
     {
         public string name { get; set; }
         public Position position { get; set; }
+        public Position prevPosition { get; set; }
         public Boolean destroyable { get; set; }
         [NonSerialized]
         private Image image;
@@ -21,6 +22,7 @@ namespace Bomberman
         {
             this.name = name;
             this.position = new Position(x, y);
+            this.prevPosition = new Position(x, y);
             this.destroyable = destroyable;
             setImage();
         }

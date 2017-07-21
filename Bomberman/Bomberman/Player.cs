@@ -58,11 +58,11 @@ namespace Bomberman
             {
                 if (!checkCollision(x, y, boardElements))
                 {
-                    int prevX = this.position.x;
-                    int prevY = this.position.y;
+                    prevPosition.x = this.position.x;
+                    prevPosition.y = this.position.y;
                     this.position.x = x;
                     this.position.y = y;
-                    boardElements[prevX, prevY].Remove(this);
+                    boardElements[prevPosition.x, prevPosition.y].Remove(this);
                     boardElements[x, y].Add(this);
                     Canvas.SetZIndex(getImage(), 2);
                 }

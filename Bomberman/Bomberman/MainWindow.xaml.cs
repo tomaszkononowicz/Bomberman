@@ -30,6 +30,7 @@ namespace Bomberman
 
         private void startGameButton_Click(object sender, RoutedEventArgs e)
         {
+            //gw = new GameWindow();
             this.Close();
             //gw.lifesCounter = Int32.Parse(textBoxPlayerLifesAmount.Text);
             //gw.bombsCounter = Int32.Parse(textBoxPlayerBombAmount.Text);

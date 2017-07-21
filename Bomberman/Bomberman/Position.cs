@@ -17,5 +17,11 @@ namespace Bomberman
             this.x = x;
             this.y = y;
         }
+
+        public bool Equals(Position position)
+        {
+            if (x == position.x && y == position.y) return true;
+            return false;
+        }
     }
 }

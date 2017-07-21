@@ -14,6 +14,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -109,6 +110,7 @@ namespace Bomberman
                     }
 
                     boardElements[i,j] = placeElements;
+                    boardElements[i, j].CollectionChanged += this.OnCollectionChanged;
                 }
             }
             int x = 0;
@@ -161,6 +163,8 @@ namespace Bomberman
             try
             {
                 formatter.Serialize(fs, boardElements);
+                SaveWindow sw = new SaveWindow();
+                sw.ShowDialog();
             }
             catch (SerializationException se)
             {
@@ -171,8 +175,6 @@ namespace Bomberman
             {
                 fs.Close();
             }
-            SaveWindow sw = new SaveWindow();
-            sw.ShowDialog();
         }
 
         public void deserialise(string fileName)
@@ -330,9 +332,22 @@ namespace Bomberman
             {
                 foreach (Element newItem in e.NewItems)
                 {
-                    Canvas.SetLeft(newItem.getImage(), newItem.position.y * 50.0);
-                    Canvas.SetTop(newItem.getImage(), newItem.position.x * 50.0);
                     Canvas.SetZIndex(newItem.getImage(), 2);
+                    if (!newItem.prevPosition.Equals(newItem.position))
+                    {
+                        Image target = newItem.getImage();
+                        double newX = newItem.position.y * 50;
+                        double newY = newItem.position.x * 50;
+                        DoubleAnimation animX = new DoubleAnimation(Canvas.GetLeft(target), newX, TimeSpan.FromMilliseconds(100));
+                        target.BeginAnimation(Canvas.LeftProperty, animX);
+                        DoubleAnimation animY = new DoubleAnimation(Canvas.GetTop(target), newY, TimeSpan.FromMilliseconds(100));
+                        target.BeginAnimation(Canvas.TopProperty, animY);
+                    }
+                    else
+                    {
+                        Canvas.SetLeft(newItem.getImage(), newItem.position.y * 50.0);
+                        Canvas.SetTop(newItem.getImage(), newItem.position.x * 50.0);
+                    }
                 }
             }
 
