@@ -28,18 +28,12 @@ namespace Bomberman
         private ObservableCollection<Element>[,] boardElements = new ObservableCollection<Element>[Constants.HEIGHT, Constants.WIDTH];
         private ObservableCollection<Element> placeElements = new ObservableCollection<Element>();
         private Random random = new Random();
-        public int lifesCounter { get; set; }
-        public int bombCounter { get; set; }
-        public int bombStrength { get; set; }
-        public int timeToExplode { get; set; }
-        public string player1Name { get; set; }
-        public string player2Name { get; set; }
 
         public GameWindow()
         {
             InitializeComponent();
-            randElements();
-            drawBoard();
+            //randElements();
+            //drawBoard();
         }
 
         private void buttonBack_Click(object sender, RoutedEventArgs e)
@@ -63,7 +57,7 @@ namespace Bomberman
                             placeElements.Add(new Wall("wall", i, j, true));
                             break;
                         case 1:
-                            placeElements.Add( new Wall("wall", i, j, false));
+                            placeElements.Add(new Wall("wall", i, j, false));
                             break;
                         case 2:
                             placeElements.Add(new Bed("sand", i, j, true));
@@ -99,7 +93,7 @@ namespace Bomberman
                     rand = random.Next(0, 40);
                     if (rand % 40 == 0 && !(placeElements.ElementAt(0) is Wall) && placeElements.Count() != 2)
                     {
-                        if(rand % 2 == 0)
+                        if (rand % 2 == 0)
                             placeElements.Add(new Spider("spider", i, j, true));
                         else
                             placeElements.Add(new Wasp("wasp", i, j, true));
@@ -109,7 +103,7 @@ namespace Bomberman
                         placeElements.Add(new Wasp("wasp", i, j, true));
                     }
 
-                    boardElements[i,j] = placeElements;
+                    boardElements[i, j] = placeElements;
                     boardElements[i, j].CollectionChanged += this.OnCollectionChanged;
                 }
             }
@@ -158,7 +152,7 @@ namespace Bomberman
 
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
-            FileStream fs = new FileStream("SaveBoard.dat", FileMode.Create);
+            FileStream fs = new FileStream("saveBoard.dat", FileMode.Create);
             BinaryFormatter formatter = new BinaryFormatter();
             try
             {
@@ -257,6 +251,35 @@ namespace Bomberman
                     boardElements[i, j].CollectionChanged += this.OnCollectionChanged;
                 }
             }
+            getPlayer1().collect += OnLabelChanged;
+            getPlayer2().collect += OnLabelChanged;
+        }
+
+        public void setGameSettings(int lifes, int bombs, string player1name, string player2name)
+        {
+            getPlayer1().lifesCounter = lifes;
+            getPlayer1().bombsCounter = bombs;
+            getPlayer1().playerName = player1name;
+            getPlayer1().bombStrength = 2;
+            getPlayer1().timeToExplode = 3;
+            getPlayer2().lifesCounter = lifes;
+            getPlayer2().bombsCounter = bombs;
+            getPlayer2().playerName = player1name;
+            getPlayer2().bombStrength = 2;
+            getPlayer2().timeToExplode = 3;
+            OnLabelChanged(null, null);
+        }
+
+        private void OnLabelChanged(object sender, EventArgs e)
+        {
+            textBoxBombsPlayer1.Text = getPlayer1().bombsCounter.ToString();
+            textBoxLifesPlayer1.Text = getPlayer1().lifesCounter.ToString();
+            textBoxExplodeTimePlayer1.Text = getPlayer1().timeToExplode.ToString();
+            textBoxBombsStrengthPlayer1.Text = getPlayer1().bombStrength.ToString();
+            textBoxBombsPlayer2.Text = getPlayer2().bombsCounter.ToString();
+            textBoxLifesPlayer2.Text = getPlayer2().lifesCounter.ToString();
+            textBoxExplodeTimePlayer2.Text = getPlayer2().timeToExplode.ToString();
+            textBoxBombsStrengthPlayer2.Text = getPlayer2().bombStrength.ToString();
         }
 
         private Player getPlayer1()
