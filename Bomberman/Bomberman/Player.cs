@@ -84,7 +84,7 @@ namespace Bomberman
                     this.position.y = y;
                     boardElements[prevPosition.x, prevPosition.y].Remove(this);
                     boardElements[x, y].Add(this);
-                    Canvas.SetZIndex(getImage(), 2);
+                    Canvas.SetZIndex(getImage(), 3);
                 }
             }
         }
