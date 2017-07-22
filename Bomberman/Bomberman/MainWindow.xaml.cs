@@ -101,5 +101,12 @@ namespace Bomberman
             this.Close();
             cw.ShowDialog();
         }
+
+        private void buttonHelp_Click(object sender, RoutedEventArgs e)
+        {
+            HelpWindow hw = new HelpWindow();
+            this.Close();
+            hw.ShowDialog();
+        }
     }
 }
