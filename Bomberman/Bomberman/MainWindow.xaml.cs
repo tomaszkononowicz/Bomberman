@@ -32,6 +32,7 @@ namespace Bomberman
         {
             try
             {
+                gw = new GameWindow(true);
                 gw.setGameSettings(Int32.Parse(textBoxPlayerLifesAmount.Text), Int32.Parse(textBoxPlayerBombAmount.Text),
                     textBoxPlayerOneName.Text, textBoxPlayerTwoName.Text);
                 this.Close();

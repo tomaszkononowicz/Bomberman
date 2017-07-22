@@ -29,11 +29,26 @@ namespace Bomberman
         private ObservableCollection<Element> placeElements = new ObservableCollection<Element>();
         private Random random = new Random();
 
-        public GameWindow()
+        public GameWindow(bool generate=false)
         {
             InitializeComponent();
-            //randElements();
-            //drawBoard();
+            if (generate) this.generateMap();
+        }
+
+        private void generateMap()
+        {
+            randElements();
+            drawBoard();
+            getPlayer1().collect += OnLabelChanged;
+            getPlayer2().collect += OnLabelChanged;
+            for (int i = 0; i < Constants.HEIGHT; i++)
+            {
+                for (int j = 0; j < Constants.WIDTH; j++)
+                {
+                    boardElements[i, j].CollectionChanged += this.OnCollectionChanged;
+                }
+            }
+            MessageBox.Show("Map generated automatically");
         }
 
         private void buttonBack_Click(object sender, RoutedEventArgs e)
