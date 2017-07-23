@@ -19,10 +19,11 @@ namespace Bomberman
                 return true;
             if (boardElements[x, y].Count > 1)
             {
-                if (boardElements[x, y].OfType<Spider>().Any<Spider>())
-                    return true;
-                if (boardElements[x, y].OfType<Wasp>().Any<Wasp>())
-                    return true;
+                if (boardElements[x, y].OfType<Player>().Any<Player>())
+                {
+                    boardElements[x, y].OfType<Player>().First().LifesCounter--;
+                    return false;
+                }
             }
             return false;
         }

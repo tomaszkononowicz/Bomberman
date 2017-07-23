@@ -30,6 +30,7 @@ namespace Bomberman
             }
         }
         public int bombsCounter { get; set; }
+        public int actualBombCounter { get; set; }
         public int bombStrength { get; set; }
         public int timeToExplode { get; set; }
         public string playerName { get; set; }
@@ -45,7 +46,6 @@ namespace Bomberman
                 if (boardElements[x, y].OfType<Life>().Any<Life>())
                 {
                     lifesCounter++;
-                    this.collect(this, null);
                     boardElements[x, y].Remove(boardElements[x, y].OfType<Life>().First());
                     return false;
                 }
@@ -81,10 +81,12 @@ namespace Bomberman
                     return false;
                 }
                 if (boardElements[x, y].OfType<Spider>().Any<Spider>())
-                    //TODO
+                {
+                    lifesCounter--;
+                    boardElements[x, y].Remove(boardElements[x, y].OfType<Spider>().First());                  
                     return false;
+                }
                 if (boardElements[x, y].OfType<Wasp>().Any<Wasp>())
-                    //TODO
                     return false;
             }
             return false;

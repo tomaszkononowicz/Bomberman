@@ -15,12 +15,10 @@ namespace Bomberman
 
         public bool checkCollision(int x, int y, ObservableCollection<Element>[,] boardElements)
         {
-            if (boardElements[x, y].Count > 1)
+            if (boardElements[x, y].OfType<Player>().Any<Player>())
             {
-                if (boardElements[x, y].OfType<Spider>().Any<Spider>())
-                    return true;
-                if (boardElements[x, y].OfType<Wasp>().Any<Wasp>())
-                    return true;
+                boardElements[x, y].OfType<Player>().First().LifesCounter--;
+                return false;
             }
             return false;
         }
