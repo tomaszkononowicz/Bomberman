@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Bomberman
@@ -24,18 +25,20 @@ namespace Bomberman
                 lifesCounter = value;
                 if (lifesCounter == 0)
                 {
-                    //looser
+                    MessageBox.Show("Gracz " + name + " przegral");
                 }
                 collect(this, null);
             }
         }
         public int bombsCounter { get; set; }
-        public int actualBombCounter { get; set; }
+        public int bombPlacedCounter { get; set; } //Jeżeli bomby nie będą serializowane to ustawiać przy deserializacji na 0
         public int bombStrength { get; set; }
         public int timeToExplode { get; set; }
         public string playerName { get; set; }
 
-        public Player(string name, int x, int y, Boolean destroyable) : base(name, x, y, destroyable) { }
+        public Player(string name, int x, int y, Boolean destroyable) : base(name, x, y, destroyable) {
+            bombPlacedCounter = 0;
+        }
 
         public Boolean checkCollision(int x, int y, ObservableCollection<Element>[,] boardElements)
         {
@@ -75,8 +78,11 @@ namespace Bomberman
                 }
                 if (boardElements[x, y].OfType<BombPlusTime>().Any<BombPlusTime>())
                 {
-                    timeToExplode++;
-                    this.collect(this, null);
+                    if (timeToExplode < 5)
+                    {
+                        timeToExplode++;
+                        this.collect(this, null);
+                    }
                     boardElements[x, y].Remove(boardElements[x, y].OfType<BombPlusTime>().First());
                     return false;
                 }

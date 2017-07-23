@@ -124,9 +124,9 @@
         <Label x:Name="labelPlayerTwo" Content="Player 2 name:" HorizontalAlignment="Left" Height="54" Margin="879,368,0,0" VerticalAlignment="Top" Width="171" FontSize="29.333" FontFamily="Gabriola"/>
         <TextBox x:Name="textBoxPlayerTwoName" HorizontalAlignment="Left" Height="44" Margin="1027,373,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola" Text="Tomasz"/>
         <Label x:Name="labelPlayerOne_Copy" Content="Player's bombs amount:" HorizontalAlignment="Left" Height="54" Margin="505,422,0,0" VerticalAlignment="Top" Width="223" FontSize="29.333" FontFamily="Gabriola"/>
-        <TextBox x:Name="textBoxPlayerBombAmount" HorizontalAlignment="Left" Height="44" Margin="733,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola" Text="3"/>
+        <TextBox x:Name="textBoxPlayerBombAmount" HorizontalAlignment="Left" Height="44" Margin="733,422,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola" Text="1"/>
         <Label x:Name="labelPlayerOne_Copy1" Content="Player's lifes amount:" HorizontalAlignment="Left" Height="54" Margin="505,471,0,0" VerticalAlignment="Top" Width="223" FontSize="29.333" FontFamily="Gabriola"/>
-        <TextBox x:Name="textBoxPlayerLifesAmount" HorizontalAlignment="Left" Height="44" Margin="733,471,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola" Text="3"/>
+        <TextBox x:Name="textBoxPlayerLifesAmount" HorizontalAlignment="Left" Height="44" Margin="733,471,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola" Text="2"/>
         <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Height="73" Margin="1182,607,0,0" VerticalAlignment="Top" Width="68" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="button_Click">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type ButtonBase}">

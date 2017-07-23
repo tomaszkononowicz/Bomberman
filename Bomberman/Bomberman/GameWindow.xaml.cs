@@ -354,6 +354,7 @@ namespace Bomberman
         {
             switch (e.Key)
             {
+                //Player 1
                 case Key.Down:
                     getPlayer1().move(getPlayer1().position.x + 1, getPlayer1().position.y, boardElements);
                     break;
@@ -366,6 +367,18 @@ namespace Bomberman
                 case Key.Left:
                     getPlayer1().move(getPlayer1().position.x, getPlayer1().position.y - 1, boardElements);
                     break;
+                case Key.Enter:
+                    if (getPlayer1().bombPlacedCounter < getPlayer1().bombsCounter)
+                    {
+                        Bomb bomb = new Bomb("bomb", getPlayer1().position.x, getPlayer1().position.y, true, getPlayer1().timeToExplode, getPlayer1().bombStrength, getPlayer1());
+                        boardElements[bomb.position.x, bomb.position.y].Add(bomb);
+                        bomb.Explode += Bomb_Explode;
+                        bomb.activate();
+                        getPlayer1().bombPlacedCounter++;
+                        Console.WriteLine(getPlayer1().bombPlacedCounter);
+                    }
+                    break;
+                //Player 2
                 case Key.W:
                     getPlayer2().move(getPlayer2().position.x - 1, getPlayer2().position.y, boardElements);
                     break;
@@ -378,24 +391,47 @@ namespace Bomberman
                 case Key.D:
                     getPlayer2().move(getPlayer2().position.x, getPlayer2().position.y + 1, boardElements);
                     break;
-                case Key.T:
-                    Bomb bomb = new Bomb("bomb", getPlayer1().position.x, getPlayer1().position.y, true, getPlayer1().timeToExplode, getPlayer1().bombStrength);
-
-                    boardElements[bomb.position.x, bomb.position.y].Add(bomb);
-                    bomb.Explode += Bomb_Explode;
-                    bomb.activate();
+                case Key.Space:
+                    if (getPlayer2().bombPlacedCounter < getPlayer2().bombsCounter)
+                    {
+                        Bomb bomb2 = new Bomb("bomb", getPlayer2().position.x, getPlayer2().position.y, true, getPlayer2().timeToExplode, getPlayer2().bombStrength, getPlayer2());
+                        boardElements[bomb2.position.x, bomb2.position.y].Add(bomb2);
+                        bomb2.Explode += Bomb_Explode;
+                        bomb2.activate();
+                        getPlayer2().bombPlacedCounter++;
+                    }
                     break;
             }
         }
 
         private void Bomb_Explode(object sender, EventArgs e)
         {
+            Bomb bomb = (Bomb)sender;
+            List<Fire> fires = bomb.fireAround(boardElements);
             Dispatcher.Invoke(new Action(() =>
             {
-                ((Bomb)sender).explode(boardElements);
+                Timer fireTimer = new Timer(120);
+                fireTimer.Elapsed += (o, eArgs) =>
+                {
+                    Dispatcher.Invoke(new Action(() =>
+                    {
+                        foreach (Fire fire in fires)
+                        {
+                            boardElements[fire.position.x, fire.position.y].Remove(fire);
+                        }
+                    }));
+                    fireTimer.Enabled = false;
+                };               
+                foreach (Fire fire in fires)
+                {
+                    boardElements[fire.position.x, fire.position.y].Add(fire);
+                }
+                fireTimer.Enabled = true;
+                bomb.explode(boardElements);
             }));
             
         }
+
 
         private void monstersMove(object sender, ElapsedEventArgs e)
         {

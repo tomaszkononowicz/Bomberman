@@ -26,7 +26,10 @@ namespace Bomberman
             this.position = new Position(x, y);
             this.prevPosition = new Position(x, y);
             this.destroyable = destroyable;
-            this.image = new Image();
+            Application.Current.Dispatcher.Invoke(new Action(() =>
+            {
+                this.image = new Image();
+            }));
             setImage();
         }
 
