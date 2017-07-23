@@ -9,13 +9,13 @@ using System.Windows.Controls;
 namespace Bomberman
 {
     [Serializable]
-    class Wasp : Element
+    class Wasp : Element, IMoveable
     {
         public Wasp(string name, int x, int y, Boolean destroyable) : base(name, x, y, destroyable) { }
 
         public bool checkCollision(int x, int y, ObservableCollection<Element>[,] boardElements)
         {
-            if (boardElements[x, y].Count == 2)
+            if (boardElements[x, y].Count > 1)
             {
                 if (boardElements[x, y].OfType<Spider>().Any<Spider>())
                     return true;

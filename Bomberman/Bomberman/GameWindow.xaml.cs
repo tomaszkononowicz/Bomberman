@@ -8,6 +8,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -28,6 +29,7 @@ namespace Bomberman
         private ObservableCollection<Element>[,] boardElements = new ObservableCollection<Element>[Constants.HEIGHT, Constants.WIDTH];
         private ObservableCollection<Element> placeElements = new ObservableCollection<Element>();
         private Random random = new Random();
+        private Timer monserMoveTimer = new Timer();
 
         public GameWindow(bool generate=false)
         {
@@ -37,6 +39,7 @@ namespace Bomberman
 
         private void generateMap()
         {
+            MessageBox.Show("Map will be generate automatically");
             randElements();
             drawBoard();
             getPlayer1().collect += OnLabelChanged;
@@ -48,7 +51,11 @@ namespace Bomberman
                     boardElements[i, j].CollectionChanged += this.OnCollectionChanged;
                 }
             }
-            MessageBox.Show("Map generated automatically");
+            //Add in deserialize
+            monserMoveTimer.Elapsed += monstersMove;
+            monserMoveTimer.Interval = 301;
+            monserMoveTimer.Enabled = true;
+        
         }
 
         private void buttonBack_Click(object sender, RoutedEventArgs e)
@@ -351,6 +358,54 @@ namespace Bomberman
                 case Key.D:
                     getPlayer2().move(getPlayer2().position.x, getPlayer2().position.y + 1, boardElements);
                     break;
+                case Key.T:
+                    monstersMove(null, null);
+                    //for (int i = 0; i < Constants.HEIGHT; i++)
+                    //{
+                    //    for (int j = 0; j < Constants.WIDTH; j++)
+                    //    {
+                    //        if (boardElements[i, j].OfType<Wasp>().Any<Wasp>())
+                    //        {
+                    //            Dispatcher.Invoke(new Action(() =>
+                    //            {
+                    //                boardElements[i, j].OfType<Wasp>().ElementAt(0).move(0, 17, boardElements);
+                    //                Console.WriteLine("0,17 Przesuniete");
+                    //            }));
+
+                    //        }
+                    //    }
+                    //}
+
+                    break;
+            }
+        }
+
+        private void monstersMove(object sender, ElapsedEventArgs e)
+        {
+            for (int i = 0; i < Constants.HEIGHT; i++)
+            {
+                for (int j = 0; j < Constants.WIDTH; j++)
+                {
+                    if (random.Next() % 3 == 0)
+                    {
+                        IEnumerable<IMoveable> moveElements = boardElements[i, j].OfType<IMoveable>();
+                        if (moveElements.Count() > 0)
+                        {
+                            if (!(moveElements.OfType<Player>().Any<Player>()))
+                            {
+                                int xOffset = random.Next(-1, 2);
+                                int yOffset = random.Next(-1, 2);
+                                IMoveable moveableElement = moveElements.ElementAt(0);
+                                Element element = (Element)moveableElement;
+                                Dispatcher.Invoke(new Action(() =>
+                                {
+                                    moveableElement.move(element.position.x+xOffset, element.position.y + yOffset, boardElements);
+                                }));
+
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -370,6 +425,11 @@ namespace Bomberman
             {
                 foreach (Element newItem in e.NewItems)
                 {
+                    if (newItem.name.Equals("wasp") && !gamePanel.Children.Contains(newItem.getImage()))
+                    {
+                        gamePanel.Children.Add(newItem.getImage());
+                    };
+
                     Canvas.SetZIndex(newItem.getImage(), 2);
                     if (!newItem.prevPosition.Equals(newItem.position))
                     {
