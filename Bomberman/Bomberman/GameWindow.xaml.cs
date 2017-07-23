@@ -76,20 +76,24 @@ namespace Bomberman
                     switch (rand)
                     {
                         case 0:
+                            if (rand % 2 == 0)
+                                placeElements.Add(new Bed("sand", i, j, false));
+                            else
+                                placeElements.Add(new Bed("grass", i, j, false));
                             placeElements.Add(new Wall("wall", i, j, true));
                             break;
                         case 1:
-                            placeElements.Add(new Wall("wall", i, j, false));
+                            placeElements.Add(new Wall("wall2", i, j, false));
                             break;
                         case 2:
-                            placeElements.Add(new Bed("sand", i, j, true));
+                            placeElements.Add(new Bed("sand", i, j, false));
                             break;
                         case 3:
-                            placeElements.Add(new Bed("grass", i, j, true));
+                            placeElements.Add(new Bed("grass", i, j, false));
                             break;
                     }
                     rand = random.Next(0, 4);
-                    if (rand % 4 == 0 && !(placeElements.ElementAt(0) is Wall))
+                    if (rand % 4 == 0 && !(placeElements.OfType<Wall>().Any<Wall>()))
                     {
                         int rand2 = random.Next(0, 5);
                         switch (rand2)
@@ -113,7 +117,7 @@ namespace Bomberman
                     }
 
                     rand = random.Next(0, 40);
-                    if (rand % 40 == 0 && !(placeElements.ElementAt(0) is Wall) && placeElements.Count() != 2)
+                    if (rand % 40 == 0 && !(placeElements.OfType<Wall>().Any<Wall>()))
                     {
                         if (rand % 2 == 0)
                             placeElements.Add(new Spider("spider", i, j, true));
@@ -131,7 +135,7 @@ namespace Bomberman
             }
             int x = 0;
             int y = 0;
-            while (boardElements[x, y].Count() == 2 || boardElements[x, y].ElementAt(0) is Wall)
+            while (boardElements[x, y].OfType<Wall>().Any<Wall>())
             {
                 x++;
                 if (x == 12) y++;
@@ -141,7 +145,7 @@ namespace Bomberman
 
             x = 12;
             y = 19;
-            while (boardElements[x, y].Count() == 2 || boardElements[x, y].ElementAt(0) is Wall)
+            while (boardElements[x, y].OfType<Wall>().Any<Wall>())
             {
                 x--;
                 if (x == 0) y--;
@@ -260,6 +264,9 @@ namespace Bomberman
                             case "wasp":
                                 el.setImage();
                                 break;
+                            case "bomb":
+                                el.setImage();
+                                break;
                         }
                         drawElement(el);
                     }
@@ -275,19 +282,20 @@ namespace Bomberman
             }
             getPlayer1().collect += OnLabelChanged;
             getPlayer2().collect += OnLabelChanged;
+            //Activate all bombs
         }
 
         public void setGameSettings(int lifes, int bombs, string player1name, string player2name)
         {
-            getPlayer1().lifesCounter = lifes;
+            getPlayer1().LifesCounter = lifes;
             getPlayer1().bombsCounter = bombs;
             getPlayer1().playerName = player1name;
-            getPlayer1().bombStrength = 2;
+            getPlayer1().bombStrength = 1;
             getPlayer1().timeToExplode = 3;
-            getPlayer2().lifesCounter = lifes;
+            getPlayer2().LifesCounter = lifes;
             getPlayer2().bombsCounter = bombs;
             getPlayer2().playerName = player1name;
-            getPlayer2().bombStrength = 2;
+            getPlayer2().bombStrength = 1;
             getPlayer2().timeToExplode = 3;
             OnLabelChanged(null, null);
         }
@@ -295,11 +303,11 @@ namespace Bomberman
         private void OnLabelChanged(object sender, EventArgs e)
         {
             textBoxBombsPlayer1.Text = getPlayer1().bombsCounter.ToString();
-            textBoxLifesPlayer1.Text = getPlayer1().lifesCounter.ToString();
+            textBoxLifesPlayer1.Text = getPlayer1().LifesCounter.ToString();
             textBoxExplodeTimePlayer1.Text = getPlayer1().timeToExplode.ToString();
             textBoxBombsStrengthPlayer1.Text = getPlayer1().bombStrength.ToString();
             textBoxBombsPlayer2.Text = getPlayer2().bombsCounter.ToString();
-            textBoxLifesPlayer2.Text = getPlayer2().lifesCounter.ToString();
+            textBoxLifesPlayer2.Text = getPlayer2().LifesCounter.ToString();
             textBoxExplodeTimePlayer2.Text = getPlayer2().timeToExplode.ToString();
             textBoxBombsStrengthPlayer2.Text = getPlayer2().bombStrength.ToString();
         }
@@ -310,8 +318,14 @@ namespace Bomberman
             {
                 for (int j = 0; j < Constants.WIDTH; j++)
                 {
-                    if (boardElements[i, j].Count == 2 && boardElements[i, j].ElementAt(1).name.Equals("player"))
-                        return (Player)boardElements[i, j].ElementAt(1);
+                    if (boardElements[i, j].OfType<Player>().Any<Player>())
+                    {
+                        foreach (Element element in boardElements[i, j])
+                        {
+                            if (element.name.Equals("player"))
+                                return (Player)element;
+                        }
+                    }
                 }
             }
             return null;
@@ -323,8 +337,14 @@ namespace Bomberman
             {
                 for (int j = Constants.WIDTH - 1; j >= 0; j--)
                 {
-                    if (boardElements[i, j].Count == 2 && boardElements[i, j].ElementAt(1).name.Equals("player2"))
-                        return (Player)boardElements[i, j].ElementAt(1);
+                    if (boardElements[i, j].OfType<Player>().Any<Player>())
+                    {
+                        foreach (Element element in boardElements[i, j])
+                        {
+                            if (element.name.Equals("player2"))
+                                return (Player)element;
+                        }
+                    }
                 }
             }
             return null;
@@ -359,25 +379,22 @@ namespace Bomberman
                     getPlayer2().move(getPlayer2().position.x, getPlayer2().position.y + 1, boardElements);
                     break;
                 case Key.T:
-                    monstersMove(null, null);
-                    //for (int i = 0; i < Constants.HEIGHT; i++)
-                    //{
-                    //    for (int j = 0; j < Constants.WIDTH; j++)
-                    //    {
-                    //        if (boardElements[i, j].OfType<Wasp>().Any<Wasp>())
-                    //        {
-                    //            Dispatcher.Invoke(new Action(() =>
-                    //            {
-                    //                boardElements[i, j].OfType<Wasp>().ElementAt(0).move(0, 17, boardElements);
-                    //                Console.WriteLine("0,17 Przesuniete");
-                    //            }));
+                    Bomb bomb = new Bomb("bomb", getPlayer1().position.x, getPlayer1().position.y, true, getPlayer1().timeToExplode, getPlayer1().bombStrength);
 
-                    //        }
-                    //    }
-                    //}
-
+                    boardElements[bomb.position.x, bomb.position.y].Add(bomb);
+                    bomb.Explode += Bomb_Explode;
+                    bomb.activate();
                     break;
             }
+        }
+
+        private void Bomb_Explode(object sender, EventArgs e)
+        {
+            Dispatcher.Invoke(new Action(() =>
+            {
+                ((Bomb)sender).explode(boardElements);
+            }));
+            
         }
 
         private void monstersMove(object sender, ElapsedEventArgs e)
@@ -393,6 +410,7 @@ namespace Bomberman
                         {
                             if (!(moveElements.OfType<Player>().Any<Player>()))
                             {
+                                //[-1, 2) - max exclusive
                                 int xOffset = random.Next(-1, 2);
                                 int yOffset = random.Next(-1, 2);
                                 IMoveable moveableElement = moveElements.ElementAt(0);

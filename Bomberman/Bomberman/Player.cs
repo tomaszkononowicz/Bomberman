@@ -12,7 +12,23 @@ namespace Bomberman
     class Player : Element
     {
         public event EventHandler collect;
-        public int lifesCounter { get; set; }
+        private int lifesCounter;
+        public int LifesCounter
+        {
+            get
+            {
+                return lifesCounter;
+            }
+            set
+            {
+                lifesCounter = value;
+                if (lifesCounter == 0)
+                {
+                    //looser
+                }
+                collect(this, null);
+            }
+        }
         public int bombsCounter { get; set; }
         public int bombStrength { get; set; }
         public int timeToExplode { get; set; }
@@ -22,51 +38,53 @@ namespace Bomberman
 
         public Boolean checkCollision(int x, int y, ObservableCollection<Element>[,] boardElements)
         {
-            if (boardElements[x, y].ElementAt(0) is Wall)
+            if (boardElements[x, y].OfType<Wall>().Any<Wall>())
                 return true;
             if (boardElements[x, y].Count == 2)
             {
-                if (boardElements[x, y].ElementAt(1) is Life)
+                if (boardElements[x, y].OfType<Life>().Any<Life>())
                 {
                     lifesCounter++;
                     this.collect(this, null);
-                    boardElements[x, y].Remove(boardElements[x, y].ElementAt(1));
+                    boardElements[x, y].Remove(boardElements[x, y].OfType<Life>().First());
                     return false;
                 }
-                if (boardElements[x, y].ElementAt(1) is BombMinusTime)
+                if (boardElements[x, y].OfType<BombMinusTime>().Any<BombMinusTime>())
                 {
                     if (timeToExplode > 0)
                     {
                         timeToExplode--;
                         this.collect(this, null);
                     }
-                    boardElements[x, y].Remove(boardElements[x, y].ElementAt(1));
+                    boardElements[x, y].Remove(boardElements[x, y].OfType<BombMinusTime>().First());
                     return false;
                 }
-                if (boardElements[x, y].ElementAt(1) is BombPlusAmount)
+                if (boardElements[x, y].OfType<BombPlusAmount>().Any<BombPlusAmount>())
                 {
                     bombsCounter++;
                     this.collect(this, null);
-                    boardElements[x, y].Remove(boardElements[x, y].ElementAt(1));
+                    boardElements[x, y].Remove(boardElements[x, y].OfType<BombPlusAmount>().First());
                     return false;
                 }
-                if (boardElements[x, y].ElementAt(1) is BombPlusStrength)
+                if (boardElements[x, y].OfType<BombPlusStrength>().Any<BombPlusStrength>())
                 {
                     bombStrength++;
                     this.collect(this, null);
-                    boardElements[x, y].Remove(boardElements[x, y].ElementAt(1));
+                    boardElements[x, y].Remove(boardElements[x, y].OfType<BombPlusStrength>().First());
                     return false;
                 }
-                if (boardElements[x, y].ElementAt(1) is BombPlusTime)
+                if (boardElements[x, y].OfType<BombPlusTime>().Any<BombPlusTime>())
                 {
                     timeToExplode++;
                     this.collect(this, null);
-                    boardElements[x, y].Remove(boardElements[x, y].ElementAt(1));
+                    boardElements[x, y].Remove(boardElements[x, y].OfType<BombPlusTime>().First());
                     return false;
                 }
-                if (boardElements[x, y].ElementAt(1) is Spider)
+                if (boardElements[x, y].OfType<Spider>().Any<Spider>())
+                    //TODO
                     return false;
-                if (boardElements[x, y].ElementAt(1) is Wasp)
+                if (boardElements[x, y].OfType<Wasp>().Any<Wasp>())
+                    //TODO
                     return false;
             }
             return false;

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace Bomberman
 {
@@ -24,6 +26,7 @@ namespace Bomberman
             this.position = new Position(x, y);
             this.prevPosition = new Position(x, y);
             this.destroyable = destroyable;
+            this.image = new Image();
             setImage();
         }
 
@@ -34,23 +37,13 @@ namespace Bomberman
 
         public void setImage()
         {
-            if (destroyable)
+            Application.Current.Dispatcher.Invoke(new Action(() =>
             {
-                this.image = new Image();
                 this.image.Source = new BitmapImage(new Uri("Images/" + name + ".png", UriKind.RelativeOrAbsolute));
-            }
-            else if (destroyable && this.name == "Player2")
-            {
-                this.image = new Image();
-                this.image.Source = new BitmapImage(new Uri("Images/player2.png", UriKind.RelativeOrAbsolute));
-            }
-            else
-            {
-                this.image = new Image();
-                this.image.Source = new BitmapImage(new Uri("Images/wall2.png", UriKind.RelativeOrAbsolute));
-            }
-            this.image.Width = 50;
-            this.image.Height = 50;
+                this.image.Width = 50;
+                this.image.Height = 50;
+            }));
+
         }
 
         // if there is a collision returns true, otherwise returns false
