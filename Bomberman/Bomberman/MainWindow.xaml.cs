@@ -38,8 +38,9 @@ namespace Bomberman
                 this.Close();
                 gw.ShowDialog();
             }
-            catch
+            catch (System.ArgumentException es)
             {
+                Console.WriteLine(es);
                 ErrorWindow ew = new ErrorWindow();
                 ew.ShowDialog();
             }

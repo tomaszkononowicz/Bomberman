@@ -397,10 +397,13 @@ namespace Bomberman
                                 int yOffset = random.Next(-1, 2);
                                 IMoveable moveableElement = moveElements.ElementAt(0);
                                 Element element = (Element)moveableElement;
+                                //
+                                //System.Threading.Tasks.TaskCanceledException
                                 Dispatcher.Invoke(new Action(() =>
                                 {
                                     moveableElement.move(element.position.x+xOffset, element.position.y + yOffset, boardElements);
                                 }));
+                                //
 
                             }
                         }
@@ -423,9 +426,10 @@ namespace Bomberman
 
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
+
                 foreach (Element newItem in e.NewItems)
                 {
-                    if (newItem.name.Equals("wasp") && !gamePanel.Children.Contains(newItem.getImage()))
+                    if ((newItem.name != "player" && newItem.name != "player2") && !gamePanel.Children.Contains(newItem.getImage()))
                     {
                         gamePanel.Children.Add(newItem.getImage());
                     };
@@ -447,6 +451,7 @@ namespace Bomberman
                         Canvas.SetTop(newItem.getImage(), newItem.position.x * 50.0);
                     }
                 }
+
             }
 
         }
