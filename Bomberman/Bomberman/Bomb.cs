@@ -70,6 +70,7 @@ namespace Bomberman
                                 if (element is Player)
                                 {
                                     ((Player)element).LifesCounter--;
+                                    //((Player)element).collect(((Player)element), null);
                                 }
                                 else
                                 {

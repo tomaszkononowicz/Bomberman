@@ -39,7 +39,7 @@ namespace Bomberman
 
         private void generateMap()
         {
-            MessageBox.Show("Map will be generate automatically");
+            //MessageBox.Show("Map will be generate automatically");
             randElements();
             drawBoard();
             getPlayer1().collect += OnLabelChanged;
@@ -294,7 +294,7 @@ namespace Bomberman
             getPlayer1().timeToExplode = 3;
             getPlayer2().LifesCounter = lifes;
             getPlayer2().bombsCounter = bombs;
-            getPlayer2().playerName = player1name;
+            getPlayer2().playerName = player2name;
             getPlayer2().bombStrength = 1;
             getPlayer2().timeToExplode = 3;
             OnLabelChanged(null, null);
@@ -306,10 +306,22 @@ namespace Bomberman
             textBoxLifesPlayer1.Text = getPlayer1().LifesCounter.ToString();
             textBoxExplodeTimePlayer1.Text = getPlayer1().timeToExplode.ToString();
             textBoxBombsStrengthPlayer1.Text = getPlayer1().bombStrength.ToString();
+
             textBoxBombsPlayer2.Text = getPlayer2().bombsCounter.ToString();
             textBoxLifesPlayer2.Text = getPlayer2().LifesCounter.ToString();
             textBoxExplodeTimePlayer2.Text = getPlayer2().timeToExplode.ToString();
             textBoxBombsStrengthPlayer2.Text = getPlayer2().bombStrength.ToString();
+
+            if (getPlayer1().LifesCounter == 0 )
+            {
+                WinningWindow ww = new WinningWindow();
+                if (getPlayer1().LifesCounter == 0)
+                    ww.textBoxWinPlayer.Text = getPlayer2().playerName;
+                else
+                    ww.textBoxWinPlayer.Text = getPlayer1().playerName;
+                this.Close();
+                ww.ShowDialog();
+            }
         }
 
         private Player getPlayer1()

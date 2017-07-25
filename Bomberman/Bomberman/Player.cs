@@ -23,10 +23,9 @@ namespace Bomberman
             set
             {
                 lifesCounter = value;
-                if (lifesCounter == 0)
-                {
-                    MessageBox.Show("Gracz " + name + " przegral");
-                }
+                //if (lifesCounter == 0)
+                //{
+                //}
                 collect(this, null);
             }
         }
@@ -49,6 +48,7 @@ namespace Bomberman
                 if (boardElements[x, y].OfType<Life>().Any<Life>())
                 {
                     lifesCounter++;
+                    this.collect(this, null);
                     boardElements[x, y].Remove(boardElements[x, y].OfType<Life>().First());
                     return false;
                 }

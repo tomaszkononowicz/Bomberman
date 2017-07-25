@@ -80,6 +80,9 @@
     <Compile Include="Spider.cs" />
     <Compile Include="Wall.cs" />
     <Compile Include="Wasp.cs" />
+    <Compile Include="WinningWindow.xaml.cs">
+      <DependentUpon>WinningWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="CloseWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -117,6 +120,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="SaveWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinningWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -238,6 +245,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\fire.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\WinningBackground.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
