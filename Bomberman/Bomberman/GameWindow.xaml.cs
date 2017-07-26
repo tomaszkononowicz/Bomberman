@@ -312,7 +312,7 @@ namespace Bomberman
             textBoxExplodeTimePlayer2.Text = getPlayer2().timeToExplode.ToString();
             textBoxBombsStrengthPlayer2.Text = getPlayer2().bombStrength.ToString();
 
-            if (getPlayer1().LifesCounter == 0 )
+            if (sender != null && ((Player)sender).LifesCounter == 0)
             {
                 WinningWindow ww = new WinningWindow();
                 if (getPlayer1().LifesCounter == 0)
