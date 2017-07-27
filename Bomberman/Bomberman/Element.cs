@@ -40,6 +40,7 @@ namespace Bomberman
 
         public void setImage()
         {
+            if (this.image == null) this.image = new Image();
             Application.Current.Dispatcher.Invoke(new Action(() =>
             {
                 this.image.Source = new BitmapImage(new Uri("Images/" + name + ".png", UriKind.RelativeOrAbsolute));

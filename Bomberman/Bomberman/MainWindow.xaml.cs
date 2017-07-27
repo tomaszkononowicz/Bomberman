@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,14 +34,17 @@ namespace Bomberman
             try
             {
                 gw = new GameWindow(true);
+                if (string.IsNullOrEmpty(textBoxPlayerBombAmount.Text) ||
+                    string.IsNullOrEmpty(textBoxPlayerLifesAmount.Text) ||
+                    string.IsNullOrEmpty(textBoxPlayerOneName.Text) ||
+                    string.IsNullOrEmpty(textBoxPlayerTwoName.Text)) throw new ArgumentException();
                 gw.setGameSettings(Int32.Parse(textBoxPlayerLifesAmount.Text), Int32.Parse(textBoxPlayerBombAmount.Text),
                     textBoxPlayerOneName.Text, textBoxPlayerTwoName.Text);
                 this.Close();
                 gw.ShowDialog();
             }
-            catch (System.ArgumentException es)
+            catch (Exception exception)
             {
-                Console.WriteLine(es);
                 ErrorWindow ew = new ErrorWindow();
                 ew.ShowDialog();
             }
@@ -48,16 +52,22 @@ namespace Bomberman
 
         private void buttonLoad_Click(object sender, RoutedEventArgs e)
         {
-            if (gw == null)
-                gw = new GameWindow();
             OpenFileDialog fd = new OpenFileDialog();
             fd.Title = "Select your map";
-            fd.ShowDialog();
-            labelUri.Content = fd.FileName.ToString();
-            buttonMap.BorderThickness = new Thickness(0.0, 0.0, 0.0, 0.0);
-            buttonMap2.BorderThickness = new Thickness(0.0, 0.0, 0.0, 0.0);
-            buttonMap3.BorderThickness = new Thickness(0.0, 0.0, 0.0, 0.0);
-            gw.deserialise(fd.FileName.ToString());
+            if (fd.ShowDialog() == true)
+            {
+                string fileName = fd.FileName;
+                if (!string.IsNullOrEmpty(fileName) && File.Exists(fileName))
+                {
+                    if (gw == null)
+                        gw = new GameWindow();
+                    labelUri.Content = fd.FileName.ToString();
+                    buttonMap.BorderThickness = new Thickness(0.0, 0.0, 0.0, 0.0);
+                    buttonMap2.BorderThickness = new Thickness(0.0, 0.0, 0.0, 0.0);
+                    buttonMap3.BorderThickness = new Thickness(0.0, 0.0, 0.0, 0.0);
+                    if (!gw.deserialise(fd.FileName.ToString())) gw.Close(); //Czy przy drugim wybraniu dziala ten sam gameWindow
+                }
+            }
         }
 
         private void buttonMap_Click(object sender, RoutedEventArgs e)
@@ -69,7 +79,7 @@ namespace Bomberman
             buttonMap2.BorderThickness = new Thickness(0.0, 0.0, 0.0, 0.0);
             buttonMap3.BorderThickness = new Thickness(0.0, 0.0, 0.0, 0.0);
             labelUri.Content = "";
-            gw.deserialise("board1.dat");
+            if (!gw.deserialise("board1.dat")) gw.Close();
 
         }
 
@@ -82,7 +92,7 @@ namespace Bomberman
             buttonMap2.BorderBrush = System.Windows.Media.Brushes.DarkBlue;
             buttonMap3.BorderThickness = new Thickness(0.0, 0.0, 0.0, 0.0);
             labelUri.Content = "";
-            gw.deserialise("board2.dat");
+            if (!gw.deserialise("board2.dat")) gw.Close();
         }
 
         private void buttonMap3_Click(object sender, RoutedEventArgs e)
@@ -94,7 +104,7 @@ namespace Bomberman
             buttonMap3.BorderThickness = new Thickness(3.0, 3.0, 3.0, 3.0);
             buttonMap3.BorderBrush = System.Windows.Media.Brushes.DarkBlue;
             labelUri.Content = "";
-            gw.deserialise("board3.dat");
+            if (!gw.deserialise("board3.dat")) gw.Close();
         }
 
         private void button_Click(object sender, RoutedEventArgs e)

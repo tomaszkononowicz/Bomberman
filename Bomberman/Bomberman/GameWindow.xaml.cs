@@ -197,7 +197,7 @@ namespace Bomberman
             }
         }
 
-        public void deserialise(string fileName)
+        public bool deserialise(string fileName)
         {
             ObservableCollection<Element>[,] newBoardElements = null;
             FileStream fs = new FileStream(fileName, FileMode.Open);
@@ -205,84 +205,87 @@ namespace Bomberman
             {
                 BinaryFormatter formatter = new BinaryFormatter();
                 newBoardElements = (ObservableCollection<Element>[,])formatter.Deserialize(fs);
+                gamePanel.Children.Clear();
+                for (int i = 0; i < Constants.HEIGHT; i++)
+                {
+                    for (int j = 0; j < Constants.WIDTH; j++)
+                    {
+                        foreach (Element el in newBoardElements[i, j])
+                        {
+                            switch (el.name)
+                            {
+                                case "wall":
+                                    el.setImage();
+                                    break;
+                                case "wall2":
+                                    el.setImage();
+                                    break;
+                                case "sand":
+                                    el.setImage();
+                                    break;
+                                case "grass":
+                                    el.setImage();
+                                    break;
+                                case "bombMinusTime":
+                                    el.setImage();
+                                    break;
+                                case "bombPlusTime":
+                                    el.setImage();
+                                    break;
+                                case "bombPlus":
+                                    el.setImage();
+                                    break;
+                                case "bombPlusStrength":
+                                    el.setImage();
+                                    break;
+                                case "life":
+                                    el.setImage();
+                                    break;
+                                case "player":
+                                    el.setImage();
+                                    break;
+                                case "player2":
+                                    el.setImage();
+                                    break;
+                                case "spider":
+                                    el.setImage();
+                                    break;
+                                case "wasp":
+                                    el.setImage();
+                                    break;
+                                case "bomb":
+                                    el.setImage();
+                                    break;
+                            }
+                            drawElement(el);
+                        }
+                    }
+                }
+                boardElements = newBoardElements;
+                for (int i = 0; i < Constants.HEIGHT; i++)
+                {
+                    for (int j = 0; j < Constants.WIDTH; j++)
+                    {
+                        boardElements[i, j].CollectionChanged += this.OnCollectionChanged;
+                    }
+                }
+                getPlayer1().collect += OnLabelChanged;
+                getPlayer2().collect += OnLabelChanged;
+                return true;
+                //Activate all 
             }
             catch (SerializationException se)
             {
                 ErrorWindow ew = new ErrorWindow();
                 ew.ShowDialog();
+                return false;
             }
             finally
             {
                 fs.Close();
             }
 
-            gamePanel.Children.Clear();
-            for (int i = 0; i < Constants.HEIGHT; i++)
-            {
-                for (int j = 0; j < Constants.WIDTH; j++)
-                {
-                    foreach (Element el in newBoardElements[i, j])
-                    {
-                        switch (el.name)
-                        {
-                            case "wall":
-                                el.setImage();
-                                break;
-                            case "wall2":
-                                el.setImage();
-                                break;
-                            case "sand":
-                                el.setImage();
-                                break;
-                            case "grass":
-                                el.setImage();
-                                break;
-                            case "bombMinusTime":
-                                el.setImage();
-                                break;
-                            case "bombPlusTime":
-                                el.setImage();
-                                break;
-                            case "bombPlus":
-                                el.setImage();
-                                break;
-                            case "bombPlusStrength":
-                                el.setImage();
-                                break;
-                            case "life":
-                                el.setImage();
-                                break;
-                            case "player":
-                                el.setImage();
-                                break;
-                            case "player2":
-                                el.setImage();
-                                break;
-                            case "spider":
-                                el.setImage();
-                                break;
-                            case "wasp":
-                                el.setImage();
-                                break;
-                            case "bomb":
-                                el.setImage();
-                                break;
-                        }
-                        drawElement(el);
-                    }
-                }
-            }
-            boardElements = newBoardElements;
-            for (int i = 0; i < Constants.HEIGHT; i++)
-            {
-                for (int j = 0; j < Constants.WIDTH; j++)
-                {
-                    boardElements[i, j].CollectionChanged += this.OnCollectionChanged;
-                }
-            }
-            getPlayer1().collect += OnLabelChanged;
-            getPlayer2().collect += OnLabelChanged;
-            //Activate all bombs
+
         }
 
         public void setGameSettings(int lifes, int bombs, string player1name, string player2name)
@@ -461,14 +464,19 @@ namespace Bomberman
                                 //[-1, 2) - max exclusive
                                 int xOffset = random.Next(-1, 2);
                                 int yOffset = random.Next(-1, 2);
-                                IMoveable moveableElement = moveElements.ElementAt(0);
-                                Element element = (Element)moveableElement;
-                                //
-                                //System.Threading.Tasks.TaskCanceledException
-                                Dispatcher.Invoke(new Action(() =>
+                                if (xOffset != 0 || yOffset != 0)
                                 {
-                                    moveableElement.move(element.position.x+xOffset, element.position.y + yOffset, boardElements);
-                                }));
+                                    IMoveable moveableElement = moveElements.ElementAt(0);
+                                    Element element = (Element)moveableElement;
+                                    try
+                                    {
+                                        Dispatcher.Invoke(new Action(() =>
+                                        {
+                                            moveableElement.move(element.position.x + xOffset, element.position.y + yOffset, boardElements);
+                                        }));
+                                    }
+                                    catch (System.Threading.Tasks.TaskCanceledException exception) { }; 
+                                }
                                 //
 
                             }
