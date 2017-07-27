@@ -32,130 +32,127 @@ namespace Bomberman
         private Timer monserMoveTimer = new Timer();
         bool gameEnd = false;
 
-        public GameWindow(bool generate=false)
+        public GameWindow()
         {
             InitializeComponent();
-            if (generate) this.generateMap();
         }
 
-        private void generateMap()
-        {
-            //MessageBox.Show("Map will be generate automatically");
-            randElements();
-            drawBoard();
-            getPlayer1().collect += OnLabelChanged;
-            getPlayer2().collect += OnLabelChanged;
-            getPlayer1().alive += OnCheckAlive;
-            getPlayer2().alive += OnCheckAlive;
-            gameEnd = false;
-            for (int i = 0; i < Constants.HEIGHT; i++)
-            {
-                for (int j = 0; j < Constants.WIDTH; j++)
-                {
-                    boardElements[i, j].CollectionChanged += this.OnCollectionChanged;
-                }
-            }
-            //Add in deserialize
-            monserMoveTimer.Elapsed += monstersMove;
-            monserMoveTimer.Interval = 301;
-            monserMoveTimer.Enabled = true;
-        
-        }
+        //Map Generator
+        //private void generateMap()
+        //{
+        //    randElements();
+        //    drawBoard();
+        //    getPlayer1().collect += OnLabelChanged;
+        //    getPlayer2().collect += OnLabelChanged;
+        //    getPlayer1().alive += OnCheckAlive;
+        //    getPlayer2().alive += OnCheckAlive;
+        //    gameEnd = false;
+        //    for (int i = 0; i < Constants.HEIGHT; i++)
+        //    {
+        //        for (int j = 0; j < Constants.WIDTH; j++)
+        //        {
+        //            boardElements[i, j].CollectionChanged += this.OnCollectionChanged;
+        //        }
+        //    }
+        //    monserMoveTimer.Elapsed += monstersMove;
+        //    monserMoveTimer.Interval = 301;
+        //    monserMoveTimer.Enabled = true;
+        //}
+
+        //private void randElements()
+        //{
+        //    for (int i = 0; i < Constants.HEIGHT; i++)
+        //    {
+        //        for (int j = 0; j < Constants.WIDTH; j++)
+        //        {
+        //            placeElements = new ObservableCollection<Element>();
+        //            int rand = random.Next(0, 4);
+        //            switch (rand)
+        //            {
+        //                case 0:
+        //                    if (rand % 2 == 0)
+        //                        placeElements.Add(new Bed("sand", i, j, false));
+        //                    else
+        //                        placeElements.Add(new Bed("grass", i, j, false));
+        //                    placeElements.Add(new Wall("wall", i, j, true));
+        //                    break;
+        //                case 1:
+        //                    placeElements.Add(new Wall("wall2", i, j, false));
+        //                    break;
+        //                case 2:
+        //                    placeElements.Add(new Bed("sand", i, j, false));
+        //                    break;
+        //                case 3:
+        //                    placeElements.Add(new Bed("grass", i, j, false));
+        //                    break;
+        //            }
+        //            rand = random.Next(0, 4);
+        //            if (rand % 4 == 0 && !(placeElements.OfType<Wall>().Any<Wall>()))
+        //            {
+        //                int rand2 = random.Next(0, 5);
+        //                switch (rand2)
+        //                {
+        //                    case 0:
+        //                        placeElements.Add(new Life("life", i, j, true));
+        //                        break;
+        //                    case 1:
+        //                        placeElements.Add(new BombPlusTime("bombPlusTime", i, j, true));
+        //                        break;
+        //                    case 2:
+        //                        placeElements.Add(new BombMinusTime("bombMinusTime", i, j, true));
+        //                        break;
+        //                    case 3:
+        //                        placeElements.Add(new BombPlusAmount("bombPlus", i, j, true));
+        //                        break;
+        //                    case 4:
+        //                        placeElements.Add(new BombPlusStrength("bombPlusStrength", i, j, true));
+        //                        break;
+        //                }
+        //            }
+
+        //            rand = random.Next(0, 40);
+        //            if (rand % 40 == 0 && !(placeElements.OfType<Wall>().Any<Wall>()))
+        //            {
+        //                if (rand % 2 == 0)
+        //                    placeElements.Add(new Spider("spider", i, j, true));
+        //                else
+        //                    placeElements.Add(new Wasp("wasp", i, j, true));
+        //            }
+        //            else if (rand % 40 == 0 && placeElements.Count() != 2)
+        //            {
+        //                placeElements.Add(new Wasp("wasp", i, j, true));
+        //            }
+
+        //            boardElements[i, j] = placeElements;
+        //            boardElements[i, j].CollectionChanged += this.OnCollectionChanged;
+        //        }
+        //    }
+        //    int x = 0;
+        //    int y = 0;
+        //    while (boardElements[x, y].OfType<Wall>().Any<Wall>())
+        //    {
+        //        x++;
+        //        if (x == 12) y++;
+        //    }
+
+        //    boardElements[x, y].Add(new Player("player", x, y, true));
+
+        //    x = 12;
+        //    y = 19;
+        //    while (boardElements[x, y].OfType<Wall>().Any<Wall>())
+        //    {
+        //        x--;
+        //        if (x == 0) y--;
+        //    }
+        //    boardElements[x, y].Add(new Player("player2", x, y, true));
+
+        //}
 
         private void buttonBack_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mw = new MainWindow();
             this.Close();
             mw.ShowDialog();
-        }
-
-        private void randElements()
-        {
-            for (int i = 0; i < Constants.HEIGHT; i++)
-            {
-                for (int j = 0; j < Constants.WIDTH; j++)
-                {
-                    placeElements = new ObservableCollection<Element>();
-                    int rand = random.Next(0, 4);
-                    switch (rand)
-                    {
-                        case 0:
-                            if (rand % 2 == 0)
-                                placeElements.Add(new Bed("sand", i, j, false));
-                            else
-                                placeElements.Add(new Bed("grass", i, j, false));
-                            placeElements.Add(new Wall("wall", i, j, true));
-                            break;
-                        case 1:
-                            placeElements.Add(new Wall("wall2", i, j, false));
-                            break;
-                        case 2:
-                            placeElements.Add(new Bed("sand", i, j, false));
-                            break;
-                        case 3:
-                            placeElements.Add(new Bed("grass", i, j, false));
-                            break;
-                    }
-                    rand = random.Next(0, 4);
-                    if (rand % 4 == 0 && !(placeElements.OfType<Wall>().Any<Wall>()))
-                    {
-                        int rand2 = random.Next(0, 5);
-                        switch (rand2)
-                        {
-                            case 0:
-                                placeElements.Add(new Life("life", i, j, true));
-                                break;
-                            case 1:
-                                placeElements.Add(new BombPlusTime("bombPlusTime", i, j, true));
-                                break;
-                            case 2:
-                                placeElements.Add(new BombMinusTime("bombMinusTime", i, j, true));
-                                break;
-                            case 3:
-                                placeElements.Add(new BombPlusAmount("bombPlus", i, j, true));
-                                break;
-                            case 4:
-                                placeElements.Add(new BombPlusStrength("bombPlusStrength", i, j, true));
-                                break;
-                        }
-                    }
-
-                    rand = random.Next(0, 40);
-                    if (rand % 40 == 0 && !(placeElements.OfType<Wall>().Any<Wall>()))
-                    {
-                        if (rand % 2 == 0)
-                            placeElements.Add(new Spider("spider", i, j, true));
-                        else
-                            placeElements.Add(new Wasp("wasp", i, j, true));
-                    }
-                    else if (rand % 40 == 0 && placeElements.Count() != 2)
-                    {
-                        placeElements.Add(new Wasp("wasp", i, j, true));
-                    }
-
-                    boardElements[i, j] = placeElements;
-                    boardElements[i, j].CollectionChanged += this.OnCollectionChanged;
-                }
-            }
-            int x = 0;
-            int y = 0;
-            while (boardElements[x, y].OfType<Wall>().Any<Wall>())
-            {
-                x++;
-                if (x == 12) y++;
-            }
-                
-            boardElements[x, y].Add(new Player("player", x, y, true));
-
-            x = 12;
-            y = 19;
-            while (boardElements[x, y].OfType<Wall>().Any<Wall>())
-            {
-                x--;
-                if (x == 0) y--;
-            }
-            boardElements[x, y].Add(new Player("player2", x, y, true));
-
         }
 
         private void drawBoard()
@@ -192,6 +189,7 @@ namespace Bomberman
             }
             catch (SerializationException se)
             {
+                Console.WriteLine(se);
                 ErrorWindow ew = new ErrorWindow();
                 ew.ShowDialog();
             }
@@ -277,8 +275,11 @@ namespace Bomberman
                 getPlayer2().collect += OnLabelChanged;
                 getPlayer1().alive += OnCheckAlive;
                 getPlayer2().alive += OnCheckAlive;
+                monserMoveTimer.Elapsed += monstersMove;
+                monserMoveTimer.Interval = 301;
+                monserMoveTimer.Enabled = true;
+                gameEnd = false;
                 return true;
-                //Activate all 
             }
             catch (SerializationException se)
             {
@@ -290,8 +291,6 @@ namespace Bomberman
             {
                 fs.Close();
             }
-
-
         }
 
         public void setGameSettings(int lifes, int bombs, string player1name, string player2name)
@@ -400,7 +399,6 @@ namespace Bomberman
                         bomb.Explode += Bomb_Explode;
                         bomb.activate();
                         getPlayer1().bombPlacedCounter++;
-                        Console.WriteLine(getPlayer1().bombPlacedCounter);
                     }
                     break;
                 //Player 2
@@ -446,7 +444,7 @@ namespace Bomberman
                         }
                     }));
                     fireTimer.Enabled = false;
-                };               
+                };
                 foreach (Fire fire in fires)
                 {
                     boardElements[fire.position.x, fire.position.y].Add(fire);
@@ -454,9 +452,7 @@ namespace Bomberman
                 fireTimer.Enabled = true;
                 bomb.explode(boardElements);
             }));
-            
         }
-
 
         private void monstersMove(object sender, ElapsedEventArgs e)
         {
@@ -487,8 +483,6 @@ namespace Bomberman
                                     }
                                     catch (System.Threading.Tasks.TaskCanceledException exception) { }; 
                                 }
-                                //
-
                             }
                         }
                     }
@@ -510,7 +504,6 @@ namespace Bomberman
 
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
-
                 foreach (Element newItem in e.NewItems)
                 {
                     if ((newItem.name != "player" && newItem.name != "player2") && !gamePanel.Children.Contains(newItem.getImage()))
@@ -535,9 +528,7 @@ namespace Bomberman
                         Canvas.SetTop(newItem.getImage(), newItem.position.x * 50.0);
                     }
                 }
-
             }
-
         }
     }
 }

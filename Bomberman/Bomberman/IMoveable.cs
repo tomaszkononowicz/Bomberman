@@ -10,7 +10,6 @@ namespace Bomberman
     interface IMoveable
     {
         void move(int x, int y, ObservableCollection<Element>[,] boardElements);
-
         ///<summary>
         ///If there is a collision returns true, otherwise returns false
         ///</summary>

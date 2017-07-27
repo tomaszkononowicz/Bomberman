@@ -12,7 +12,9 @@ namespace Bomberman
     [Serializable]
     class Player : Element
     {
+        [field: NonSerialized]
         public event EventHandler collect;
+        [field: NonSerialized]
         public event EventHandler alive;
         private int lifesCounter;
         public int LifesCounter
@@ -24,15 +26,12 @@ namespace Bomberman
             set
             {
                 lifesCounter = value;
-                //if (lifesCounter == 0)
-                //{
-                //}
                 collect(this, null);
                 alive(this, null);
             }
         }
         public int bombsCounter { get; set; }
-        public int bombPlacedCounter { get; set; } //Jeżeli bomby nie będą serializowane to ustawiać przy deserializacji na 0
+        public int bombPlacedCounter { get; set; } 
         public int bombStrength { get; set; }
         public int timeToExplode { get; set; }
         public string playerName { get; set; }
@@ -49,7 +48,7 @@ namespace Bomberman
             {
                 if (boardElements[x, y].OfType<Life>().Any<Life>())
                 {
-                    lifesCounter++;
+                    LifesCounter++;
                     this.collect(this, null);
                     boardElements[x, y].Remove(boardElements[x, y].OfType<Life>().First());
                     return false;
@@ -90,7 +89,7 @@ namespace Bomberman
                 }
                 if (boardElements[x, y].OfType<Spider>().Any<Spider>())
                 {
-                    lifesCounter--;
+                    LifesCounter--;
                     boardElements[x, y].Remove(boardElements[x, y].OfType<Spider>().First());                  
                     return false;
                 }

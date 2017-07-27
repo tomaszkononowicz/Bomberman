@@ -23,6 +23,7 @@ namespace Bomberman
         public int Strength { get; set; }
         private int timeToExplode;
         private Player owner;
+        [field: NonSerialized]
         public event EventHandler Explode;
         public int TimeToExplode {
             get
@@ -70,7 +71,6 @@ namespace Bomberman
                                 if (element is Player)
                                 {
                                     ((Player)element).LifesCounter--;
-                                    //((Player)element).collect(((Player)element), null);
                                 }
                                 else
                                 {

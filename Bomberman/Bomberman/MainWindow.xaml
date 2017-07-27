@@ -126,7 +126,7 @@
         <Label x:Name="labelPlayerOne_Copy" Content="Player's bombs amount at the same time:" HorizontalAlignment="Left" Height="54" Margin="505,422,0,0" VerticalAlignment="Top" Width="404" FontSize="29.333" FontFamily="Gabriola"/>
         <TextBox x:Name="textBoxPlayerBombAmount" HorizontalAlignment="Left" Height="44" Margin="901,427,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola" Text="1"/>
         <Label x:Name="labelPlayerOne_Copy1" Content="Player's lifes amount:" HorizontalAlignment="Left" Height="54" Margin="505,471,0,0" VerticalAlignment="Top" Width="223" FontSize="29.333" FontFamily="Gabriola"/>
-        <TextBox x:Name="textBoxPlayerLifesAmount" HorizontalAlignment="Left" Height="44" Margin="728,471,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola" Text="2"/>
+        <TextBox x:Name="textBoxPlayerLifesAmount" HorizontalAlignment="Left" Height="44" Margin="728,471,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="55" Background="{x:Null}" FontSize="29.333" FontFamily="Gabriola" Text="3"/>
         <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Height="73" Margin="1182,607,0,0" VerticalAlignment="Top" Width="68" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="button_Click">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type ButtonBase}">

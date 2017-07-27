@@ -56,7 +56,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Board.cs" />
     <Compile Include="Bomb.cs" />
     <Compile Include="BombMinusTime.cs" />
     <Compile Include="BombPlusAmount.cs" />
@@ -147,6 +146,15 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Boards\board1.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Boards\board2.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Boards\board3.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -220,11 +228,6 @@
     <Resource Include="Images\wasp.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\board1.PNG" />
-    <Resource Include="Images\board2.PNG" />
-    <Resource Include="Images\board3.PNG" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\save.png" />
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +250,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\howToPlayBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\board2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\board1.png" />
+    <Resource Include="Images\board3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
