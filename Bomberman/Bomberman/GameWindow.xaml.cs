@@ -30,6 +30,7 @@ namespace Bomberman
         private ObservableCollection<Element> placeElements = new ObservableCollection<Element>();
         private Random random = new Random();
         private Timer monserMoveTimer = new Timer();
+        bool gameEnd = false;
 
         public GameWindow(bool generate=false)
         {
@@ -44,6 +45,9 @@ namespace Bomberman
             drawBoard();
             getPlayer1().collect += OnLabelChanged;
             getPlayer2().collect += OnLabelChanged;
+            getPlayer1().alive += OnCheckAlive;
+            getPlayer2().alive += OnCheckAlive;
+            gameEnd = false;
             for (int i = 0; i < Constants.HEIGHT; i++)
             {
                 for (int j = 0; j < Constants.WIDTH; j++)
@@ -271,6 +275,8 @@ namespace Bomberman
                 }
                 getPlayer1().collect += OnLabelChanged;
                 getPlayer2().collect += OnLabelChanged;
+                getPlayer1().alive += OnCheckAlive;
+                getPlayer2().alive += OnCheckAlive;
                 return true;
                 //Activate all 
             }
@@ -314,9 +320,13 @@ namespace Bomberman
             textBoxLifesPlayer2.Text = getPlayer2().LifesCounter.ToString();
             textBoxExplodeTimePlayer2.Text = getPlayer2().timeToExplode.ToString();
             textBoxBombsStrengthPlayer2.Text = getPlayer2().bombStrength.ToString();
+        }
 
-            if (sender != null && ((Player)sender).LifesCounter == 0)
+        private void OnCheckAlive(object sender, EventArgs e)
+        {
+            if (sender != null && ((Player)sender).LifesCounter == 0 && !gameEnd)
             {
+                gameEnd = true;
                 WinningWindow ww = new WinningWindow();
                 if (getPlayer1().LifesCounter == 0)
                     ww.textBoxWinPlayer.Text = getPlayer2().playerName;

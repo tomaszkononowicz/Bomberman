@@ -33,7 +33,8 @@ namespace Bomberman
         {
             try
             {
-                gw = new GameWindow(true);
+                if (gw == null)
+                    gw = new GameWindow(true);
                 if (string.IsNullOrEmpty(textBoxPlayerBombAmount.Text) ||
                     string.IsNullOrEmpty(textBoxPlayerLifesAmount.Text) ||
                     string.IsNullOrEmpty(textBoxPlayerOneName.Text) ||

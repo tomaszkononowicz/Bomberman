@@ -13,6 +13,7 @@ namespace Bomberman
     class Player : Element
     {
         public event EventHandler collect;
+        public event EventHandler alive;
         private int lifesCounter;
         public int LifesCounter
         {
@@ -27,6 +28,7 @@ namespace Bomberman
                 //{
                 //}
                 collect(this, null);
+                alive(this, null);
             }
         }
         public int bombsCounter { get; set; }

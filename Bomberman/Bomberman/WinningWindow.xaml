@@ -11,9 +11,9 @@
         <ImageBrush ImageSource="/Images/winningBackground.png"/>
     </Window.Background>
     <Grid>
-        <Label x:Name="labelCongrats" Content="Congratulations!" HorizontalAlignment="Left" Height="100" Margin="347,230,0,0" VerticalAlignment="Top" Width="535" FontSize="50" FontFamily="Gabriola"/>
-        <Label x:Name="labelWinPlayer" Content="Player                              won the game!" HorizontalAlignment="Left" Height="100" Margin="191,330,0,0" VerticalAlignment="Top" Width="615" FontSize="50" FontFamily="Gabriola"/>
-        <TextBox x:Name="textBoxWinPlayer"  HorizontalAlignment="Left" Height="83" Margin="306,335,0,0" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" Width="229" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" FontSize="50" FontFamily="Gabriola" IsEnabled="False" FontWeight="Bold">
+        <Label x:Name="labelCongrats" Content="Congratulations!" HorizontalAlignment="Left" Height="100" Margin="285,230,0,0" VerticalAlignment="Top" Width="297" FontSize="50" FontFamily="Gabriola"/>
+        <Label x:Name="labelWinPlayer" Content="won the game!" HorizontalAlignment="Left" Height="100" Margin="304,418,0,0" VerticalAlignment="Top" Width="243" FontSize="50" FontFamily="Gabriola"/>
+        <TextBox x:Name="textBoxWinPlayer"  HorizontalAlignment="Left" Height="83" Margin="52,335,0,0" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" Width="743" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" FontSize="50" FontFamily="Gabriola" IsEnabled="False" FontWeight="Bold">
             <TextBox.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>

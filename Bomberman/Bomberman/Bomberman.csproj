@@ -70,7 +70,6 @@
     <Compile Include="HelpWindow.xaml.cs">
       <DependentUpon>HelpWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="IBonus.cs" />
     <Compile Include="IMoveable.cs" />
     <Compile Include="Life.cs" />
     <Compile Include="Player.cs" />
@@ -238,9 +237,6 @@
     <Resource Include="Images\sad.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\howToPlayBackground.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\help.png" />
   </ItemGroup>
   <ItemGroup>
@@ -248,6 +244,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\WinningBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\howToPlayBackground.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
