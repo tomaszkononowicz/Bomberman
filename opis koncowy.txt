@@ -1,0 +1,34 @@
+Link do filmiku:
+https://youtu.be/DcFN_4m5sjk
+
+Bomberman w technologii WPF dla 2 osób. Osoba, która ma 0 ¿yæ przegrywa. 
+
+Katarzyna:
+- okienka gry w technologii WPF
+- menu g³ówne
+- obrazki - zaprojektowanie i wyœwietlanie ich
+- zaprojektowanie i implementacja planszy (u¿ycie canvas)
+- mo¿liwoœæ wpisania swojego imienia (u¿ycie textboxu)
+- ustawienie liczby ¿yæ i pocz¹tkowej liczby bomb
+- serializacja i deserializacja (u¿ycie BinaryFormatter)
+- aktualizacja wyœwietlanych informacji przy pomocy eventów
+- zbieranie i implementacja bonusów
+
+Tomasz:
+- interfejs IMoveable
+- implementacja tego interfejsu dla poszczególnych klas
+- automatyczne poruszanie siê potworów, co daje efekt gry w czasie rzeczywistym (u¿ycie klasy Timer)
+- rysowanie w technologii WPF w ró¿nych w¹tkach (u¿ycie klasy Dispatcher)
+- implementacja bomb przy pomocy eventów oraz property
+- stworzenie imitacji efektu wybuchu bomby przy pomocy ognia
+- obs³uga klawiszy (wbudowane eventy WPF)
+- mo¿liwoœæ poruszania siê i stawiania bomb
+- animacja poruszania siê (u¿ycie DoubleAnimation)
+
+
+
+
+
+
+
+
